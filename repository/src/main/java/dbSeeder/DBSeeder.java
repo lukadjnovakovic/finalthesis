@@ -45,6 +45,7 @@ public class DBSeeder implements CommandLineRunner {
         TipEntity t2 = new TipEntity("2");
         TipEntity tgg = new TipEntity("GG");
         TipEntity tOver = new TipEntity("3+");
+        TipEntity tCmb = new TipEntity("1&3+");
 
         TeamEntity tm1 = new TeamEntity("Real Madrid",c1);
         TeamEntity tm2 = new TeamEntity("Real Betis",c1);
@@ -59,12 +60,14 @@ public class DBSeeder implements CommandLineRunner {
         OddsEntity odds3 = new OddsEntity(g1,t2,2.25);
         OddsEntity odds4 = new OddsEntity(g1,tgg,2.25);
         OddsEntity odds5 = new OddsEntity(g1,tOver,2.25);
+        OddsEntity odds6 = new OddsEntity(g1,tCmb,4.25);
 
         OddsEntity odds11 = new OddsEntity(g2,t1,2.25);
         OddsEntity odds12 = new OddsEntity(g2,tx,2.25);
         OddsEntity odds13 = new OddsEntity(g2,t2,2.25);
         OddsEntity odds14 = new OddsEntity(g2,tgg,2.25);
         OddsEntity odds15 = new OddsEntity(g2,tOver,2.25);
+        OddsEntity odds16 = new OddsEntity(g2,tCmb,5.25);
 
         countryRepo.save(c1);
         countryRepo.save(c2);
@@ -81,6 +84,7 @@ public class DBSeeder implements CommandLineRunner {
         tipRepo.save(t2);
         tipRepo.save(tgg);
         tipRepo.save(tOver);
+        tipRepo.save(tCmb);
 
         teamRepo.save(tm1);
         teamRepo.save(tm2);
@@ -100,6 +104,8 @@ public class DBSeeder implements CommandLineRunner {
         oddsRepo.save(odds13);
         oddsRepo.save(odds14);
         oddsRepo.save(odds15);
+        oddsRepo.save(odds16);
+        oddsRepo.save(odds6);
 
 
     }

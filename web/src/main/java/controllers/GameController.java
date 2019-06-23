@@ -1,21 +1,21 @@
 package controllers;
 
-import dto.TeamDTO;
+import dto.GameDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import services.ITeamService;
+import services.IGameService;
 
 import java.util.List;
 
 @RestController
-public class TeamController {
+public class GameController {
 
     @Autowired
-    private static ITeamService teamService;
+    IGameService gameService;
 
-    @GetMapping(value = "/team")
-    public static List<TeamDTO> getAllTeams() {
-        return teamService.getAllTeams();
+    @GetMapping(value = "/games")
+    public List<GameDTO> getAllGames(){
+        return gameService.returnAllGames();
     }
 }

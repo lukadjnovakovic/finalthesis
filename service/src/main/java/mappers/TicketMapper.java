@@ -9,5 +9,5 @@ import org.mapstruct.Mapping;
 public interface TicketMapper {
 
     @Mapping(target = "win", expression = "java(ticketEntity.getPayment() * ticketEntity.getOverallOdds())")
-    TicketDTO team2DTO(TicketEntity ticketEntity);
+    TicketDTO ticket2DTO(TicketEntity ticketEntity);
 }

@@ -64,7 +64,7 @@ public class AppController {
 //            If the user is successfully authenticated, generate active session
             httpRequest.getSession().setAttribute("loggedUser", user);
 //          Redirect to home page
-            httpResponse.sendRedirect("/games");
+            httpResponse.sendRedirect("/home");
         } catch (Exception e) {
             e.printStackTrace();
             httpResponse.sendRedirect("/error");

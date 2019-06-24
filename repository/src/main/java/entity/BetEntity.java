@@ -10,10 +10,7 @@ public class BetEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
-    private Game game;
-    @ManyToOne
-    private TipEntity tip;
-    private double odds;
+    private OddsEntity odds;
     @ManyToOne
     private TicketEntity ticket;
 
@@ -28,27 +25,11 @@ public class BetEntity {
         this.id = id;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public TipEntity getTip() {
-        return tip;
-    }
-
-    public void setTip(TipEntity tip) {
-        this.tip = tip;
-    }
-
-    public double getOdds() {
+    public OddsEntity getOdds() {
         return odds;
     }
 
-    public void setOdds(double odds) {
+    public void setOdds(OddsEntity odds) {
         this.odds = odds;
     }
 

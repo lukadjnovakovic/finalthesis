@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
+import './Home.css';
 import  ReactTable from 'react-table'
 import  'react-table/react-table.css'
 
-export class App extends React.Component{
+export class Home extends React.Component{
 
   constructor(props){
     super(props);
@@ -18,8 +18,8 @@ export class App extends React.Component{
         const tipsHeaders = this.state.tips.map((t)=>{
             return {
                 Header: t.name,
-                accessor: y=> y.odds.filter(z=>z.tip.id==t.id)[0].odds,
-                Cell : props => <div style={{textAlign : "center"}}>{props.value}</div>,
+                accessor: y => y.odds.filter(z=>z.tip.id===t.id).length>0? y.odds.filter(z=>z.tip.id===t.id)[0].odds : '-',
+                Cell : props => <div>{props.value}</div>,
                 id: t.name,
             }
         });
@@ -50,4 +50,4 @@ export class App extends React.Component{
   }
 }
 
-export default App;
+export default Home;

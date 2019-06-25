@@ -20,4 +20,5 @@ public class GameController {
     public List<GameDTO> getAllGames(){
         return gameService.returnAllGames();
     }
+
 }

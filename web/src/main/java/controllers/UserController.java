@@ -9,8 +9,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import services.IUserService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api")
@@ -18,7 +16,6 @@ public class UserController {
 
     @Autowired
     IUserService userService;
-    private HttpServletRequest httpRequest;
 
     @GetMapping(value = "/users/{id}")
     public UserDTO getUserById(@PathVariable Integer id) throws Exception {
@@ -26,7 +23,7 @@ public class UserController {
     }
 
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/deprecated ")
     public String returnUser(HttpEntity<String> httpRequest){
         UserDTO user = null;
         System.out.println(httpRequest.getBody());
@@ -43,19 +40,6 @@ public class UserController {
         System.out.println(username + password);
 
 
-        return "evo ti gsooooon"+username;
-
-//        try {
-//            System.out.println(username+"dsadasdasd");
-////          Searching for user by username and then checking his password
-//            user = userService.returnUserByUsername(username);
-//            if(!user.getPassword().equals(password)){
-//                throw new Exception("Invalid password!");
-//            }
-//            httpRequest.getSession().setAttribute("loggedUser", user);
-//            httpResponse.sendRedirect("/home/");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        return "username: "+username;
     }
 }

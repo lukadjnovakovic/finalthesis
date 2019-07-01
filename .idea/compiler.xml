@@ -21,8 +21,8 @@
           <entry name="$MAVEN_REPOSITORY$/org/springframework/spring-context/4.0.3.RELEASE/spring-context-4.0.3.RELEASE.jar" />
           <entry name="$MAVEN_REPOSITORY$/joda-time/joda-time/2.9/joda-time-2.9.jar" />
         </processorPath>
-        <module name="repository" />
         <module name="web" />
+        <module name="repository" />
         <module name="service" />
       </profile>
     </annotationProcessing>
@@ -30,7 +30,7 @@
       <module name="bookies" target="1.6" />
       <module name="repository" target="8" />
       <module name="service" target="8" />
-      <module name="web" target="1.6" />
+      <module name="web" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

@@ -41,10 +41,20 @@ export class Home extends React.Component{
   }
 
   componentDidMount() {
-    fetch('/api/games').then(res => res.json()).then((games) => {
+    fetch('/api/games',
+        {
+            headers: {
+                "Authorization" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTYyMDAzMzAwLCJleHAiOjE1NjI2MDgxMDB9.3zIubcGYHJrPrwa_b-87oQV5XRtBy9bPOOO_m5Mbmlrwh5eCCcuH3Eb9KFJAc3ByKM7rx9mXi8XEAiIZalojiA"
+            },
+        }).then(res => res.json()).then((games) => {
       this.setState({games: games});
     })
-    fetch('/api/tips').then(res => res.json()).then((tips) => {
+    fetch('/api/tips',
+        {
+            headers: {
+                "Authorization" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTYyMDAzMzAwLCJleHAiOjE1NjI2MDgxMDB9.3zIubcGYHJrPrwa_b-87oQV5XRtBy9bPOOO_m5Mbmlrwh5eCCcuH3Eb9KFJAc3ByKM7rx9mXi8XEAiIZalojiA"
+            },
+        }).then(res => res.json()).then((tips) => {
       this.setState({tips:tips});
     })
   }

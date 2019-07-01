@@ -38,7 +38,7 @@ public class DBSeeder implements CommandLineRunner {
         Competition co2 = new Competition("Primera");
         Competition co3 = new Competition("Serie A");
 
-        UserEntity user = new UserEntity("Luka","Novakovic","123","123");
+        UserEntity user = new UserEntity("Luka","Novakovic","luka","luka");
 
         TipEntity t1 = new TipEntity("1");
         TipEntity tx = new TipEntity("X");

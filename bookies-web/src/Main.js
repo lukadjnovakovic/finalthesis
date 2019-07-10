@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import LoginOld from "./LoginOld";
 import Home from "./Home";
-import LoginRegister from "./Login";
-import ReactDOM from "react-dom";
+import Loginscreen from "./Loginscreen";
+// import ReactDOM from "react-dom";
 
 export default class Main extends Component {
 
@@ -22,7 +21,7 @@ export default class Main extends Component {
         if (this.state.token) {
             page = <Home token={this.state.token}></Home>;
         } else {
-            page = <LoginRegister setToken={((token) => this.setToken(token)).bind(this)}/>;
+            page = <Loginscreen setToken={((token) => this.setToken(token)).bind(this)}/>;
         }
         return page;
     }

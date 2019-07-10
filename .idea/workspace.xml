@@ -2,24 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5127c344-c6aa-4a18-8c76-48232c73e30a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bookies-web/src/LoginOld.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookies-web/src/LoginOld.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookies-web/src/Main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookies-web/src/Main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookies-web/src/Register.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookies-web/src/Loginscreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookies-web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/bookies-web/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookies-web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/bookies-web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookies-web/src/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/bookies-web/src/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookies-web/src/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/bookies-web/src/Login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookies-web/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/bookies-web/src/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookies-web/src/LoginOld.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookies-web/src/LoginOld.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookies-web/src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/bookies-web/src/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookies-web/src/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/bookies-web/src/Register.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookies-web/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/bookies-web/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repository/src/main/java/dbSeeder/DBSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/repository/src/main/java/dbSeeder/DBSeeder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/payload/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/payload/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -57,8 +49,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bookies-web/src/Register.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="254">
+              <caret line="30" column="49" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bookies-web/src/Loginscreen.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="569">
+              <caret line="68" column="10" lean-forward="true" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -69,22 +73,43 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bookies-web/src/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+            <state relative-caret-position="408">
+              <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
               <folding>
-                <element signature="e#0#67#0" expanded="true" />
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bookies-web/src/LoginOld.js">
+        <entry file="file://$PROJECT_DIR$/bookies-web/src/Home.test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
+            <state relative-caret-position="153">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
               <folding>
-                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bookies-web/src/Login.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bookies-web/src/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,8 +118,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bookies-web/src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="374">
+              <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -125,6 +150,7 @@
       <find>asdf</find>
       <find>jsonig</find>
       <find>state</find>
+      <find>loginold</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -134,8 +160,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/repository/src/main/java/repository/OddsRepo.java" />
-        <option value="$PROJECT_DIR$/service/src/main/java/impl/GameServiceImpl.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/services/ITipService.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/impl/TipServiceImpl.java" />
         <option value="$PROJECT_DIR$/web/src/main/resources/META-INF/resources/WEB-INF/views/index.jsp" />
@@ -176,15 +200,17 @@
         <option value="$PROJECT_DIR$/repository/src/main/java/dbSeeder/DBSeeder.java" />
         <option value="$PROJECT_DIR$/web/src/main/java/config/WebConfig.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/impl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/bookies-web/src/index.js" />
         <option value="$PROJECT_DIR$/web/src/main/java/controllers/AuthController.java" />
         <option value="$PROJECT_DIR$/bookies-web/src/Home.js" />
         <option value="$PROJECT_DIR$/web/src/main/java/config/SecurityConfig.java" />
         <option value="$PROJECT_DIR$/bookies-web/src/LoginRegister.css" />
-        <option value="$PROJECT_DIR$/bookies-web/src/Main.js" />
         <option value="$PROJECT_DIR$/bookies-web/src/LoginRegister.js" />
+        <option value="$PROJECT_DIR$/bookies-web/src/LoginOld.js" />
         <option value="$PROJECT_DIR$/bookies-web/src/Login.js" />
+        <option value="$PROJECT_DIR$/bookies-web/src/index.js" />
+        <option value="$PROJECT_DIR$/bookies-web/src/Loginscreen.js" />
         <option value="$PROJECT_DIR$/bookies-web/src/Register.js" />
+        <option value="$PROJECT_DIR$/bookies-web/src/Main.js" />
       </list>
     </option>
   </component>
@@ -527,12 +553,12 @@
       <workItem from="1561399821540" duration="28596000" />
       <workItem from="1562088795994" duration="10816000" />
       <workItem from="1562500651302" duration="10053000" />
-      <workItem from="1562785333030" duration="526000" />
+      <workItem from="1562785333030" duration="6469000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="179052000" />
+    <option name="totallyTimeSpent" value="184995000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -547,7 +573,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49642006" visible="true" weight="0.24281392" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49642006" visible="true" weight="0.2549168" />
       <window_info id="Structure" order="1" sideWeight="0.50236964" side_tool="true" weight="0.22768533" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -557,13 +583,13 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.20785597" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848714" weight="0.20785597" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.31423897" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.3289689" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49924356" weight="0.36006546" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49924356" visible="true" weight="0.21767594" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5015129" side_tool="true" weight="0.95090014" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.3289689" />
@@ -603,20 +629,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.1.5.RELEASE/spring-security-web-5.1.5.RELEASE.jar!/org/springframework/security/web/context/request/async/WebAsyncManagerIntegrationFilter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.7.RELEASE/spring-web-5.1.7.RELEASE.jar!/org/springframework/web/filter/CharacterEncodingFilter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.7.RELEASE/spring-web-5.1.7.RELEASE.jar!/org/springframework/web/filter/DelegatingFilterProxy.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -875,16 +887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bookies-web/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/src/main/java/controllers/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -921,13 +923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bookies-web/src/Login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bookies-web/src/LoginOld.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -940,10 +935,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bookies-web/src/LoginOld.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="54" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bookies-web/src/Login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bookies-web/src/Home.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bookies-web/src/Register.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="254">
+          <caret line="30" column="49" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bookies-web/src/Loginscreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="68" column="10" lean-forward="true" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -952,28 +984,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bookies-web/src/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bookies-web/src/LoginOld.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
+        <state relative-caret-position="408">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bookies-web/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bookies-web/src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="374">
+          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

@@ -1,44 +1,46 @@
+import React, { Component } from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-class Login extends Component {
+
+export default class Login extends Component {
     constructor(props){
         super(props);
         this.state={
+            token:'',
             username:'',
             password:''
         }
     }
 
-    handleClick(event){
-        var apiBaseUrl = "http://localhost:4000/api/";
-        var self = this;
+    handleClick(event,e){
         var payload={
-            "email":this.state.username,
+            "username":this.state.username,
             "password":this.state.password
         }
-        axios.post(apiBaseUrl+'login', payload)
-            .then(function (response) {
-                console.log(response);
-                if(response.data.code == 200){
-                    console.log("Login successfull");
-                    var uploadScreen=[];
-                    uploadScreen.push(<UploadScreen appContext={self.props.appContext}/>)
-                    self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
+        // e.preventDefault();
+        try {
+            fetch('http://localhost:8081/api/auth/login',
+                {
+                    method: 'POST',
+                    headers: {
+                        // 'Accept': 'aplication/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({username: this.state.username, password: this.state.password})
                 }
-                else if(response.data.code == 204){
-                    console.log("Username password do not match");
-                    alert("username password do not match")
-                }
-                else{
-                    console.log("Username does not exists");
-                    alert("Username does not exist");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            ).then((res) => res.json()
+            ).then(
+                x=>this.props.setToken(x.accessToken)
+                //x=>console.log(x)
+            );
+
+            // ).then(x => this.setState({token: x.body.accessToken}));
+
+        }catch(e){
+            console.log(e);
+        }
     }
 
     render() {
@@ -72,4 +74,3 @@ class Login extends Component {
 const style = {
     margin: 15,
 };
-export default Login;

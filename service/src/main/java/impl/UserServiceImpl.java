@@ -50,9 +50,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void saveUser(UserEntity userEntity) {
-
         userRepo.save(userEntity);
-
     }
 
 

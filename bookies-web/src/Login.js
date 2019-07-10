@@ -1,82 +1,75 @@
-import React, { Component } from "react";
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import Home from "./Home";
-
-export default class Login extends Component {
-    constructor(props) {
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+class Login extends Component {
+    constructor(props){
         super(props);
-
-        this.state = {
-            username: "",
-            password: "",
-            token: "",
-            message: "",
-            error: ""
-        };
+        this.state={
+            username:'',
+            password:''
+        }
     }
 
-    validateForm() {
-        return this.state.email.length > 0 && this.state.password.length > 0;
-    }
-
-    handleChange = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
-    // componentDidMount () {
-    //     console.log('asdfadfsafd');
-    //     fetch('/api/auth/login',
-    //         {
-    //             method : 'POST',
-    //             headers : {
-    //                 'Content-Type' : 'aplication/json'
-    //             },
-    //             body : JSON.stringify({username: "luka", password: "luka"})
-    //         }
-    //     ).then(res => console.log(res));
-    // }
-
-    componentDidMount() {
-        console.log("TOKEN " + this.state.token);
-    }
-
-    handleSubmit () {
-        console.log("token " + this.state.token);
-        //console.log('sacu da fecujem sa post hehe to vi mislite bice GET ipak');
-        fetch('/api/auth/login',
-            {
-                method : 'POST',
-                headers : {
-                    'Accept' : 'aplication/json',
-                    'Content-Type' : 'aplication/json'
-                },
-                body : JSON.stringify({username: this.state.username, password: this.state.password})
-            }
-        ).then((res) => res.json()
-        ).then(x => this.setState({token:x.body.accessToken}));
+    handleClick(event){
+        var apiBaseUrl = "http://localhost:4000/api/";
+        var self = this;
+        var payload={
+            "email":this.state.username,
+            "password":this.state.password
+        }
+        axios.post(apiBaseUrl+'login', payload)
+            .then(function (response) {
+                console.log(response);
+                if(response.data.code == 200){
+                    console.log("Login successfull");
+                    var uploadScreen=[];
+                    uploadScreen.push(<UploadScreen appContext={self.props.appContext}/>)
+                    self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
+                }
+                else if(response.data.code == 204){
+                    console.log("Username password do not match");
+                    alert("username password do not match")
+                }
+                else{
+                    console.log("Username does not exists");
+                    alert("Username does not exist");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     render() {
         return (
-            <Form>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control name="username" onChange={this.handleChange} type="username"
-                                  placeholder="Enter username"/>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control name="password" onChange={this.handleChange} type="password" placeholder="Password"/>
-                </Form.Group>
-                <Button onClick={this.handleSubmit.bind(this)} variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+            <div>
+                <MuiThemeProvider>
+                    <div>
+                        <AppBar
+                            title="Login"
+                        />
+                        <TextField
+                            hintText="Enter your Username"
+                            floatingLabelText="Username"
+                            onChange = {(event,newValue) => this.setState({username:newValue})}
+                        />
+                        <br/>
+                        <TextField
+                            type="password"
+                            hintText="Enter your Password"
+                            floatingLabelText="Password"
+                            onChange = {(event,newValue) => this.setState({password:newValue})}
+                        />
+                        <br/>
+                        <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+                    </div>
+                </MuiThemeProvider>
+            </div>
         );
     }
 }
+const style = {
+    margin: 15,
+};
+export default Login;

@@ -1,5 +1,7 @@
 package payload;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {

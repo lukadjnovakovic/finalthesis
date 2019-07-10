@@ -3,14 +3,37 @@ import './Home.css';
 import  ReactTable from 'react-table'
 import  'react-table/react-table.css'
 
+var api_base='http://localhost:8081';
+
 export class Home extends React.Component{
 
   constructor(props){
     super(props);
     this.state = {
-      games:null,
-      tips:null
+        games : null,
+        tips: null,
     }
+  }
+
+  componentDidMount() {
+        fetch(api_base +'/api/games',
+            {
+                method: 'GET',
+                headers: {
+                    "Authorization" : "Bearer " + this.props.token,
+                },
+            }).then(res => res.json()).then((games) => {
+            this.setState({games: games});
+        });
+        fetch(api_base+'/api/tips',
+            {
+                method: 'GET',
+                headers: {
+                    "Authorization" : "Bearer " + this.props.token,
+                },
+            }).then(res => res.json()).then((tips) => {
+            this.setState({tips:tips});
+        });
   }
 
   render(){
@@ -36,27 +59,8 @@ export class Home extends React.Component{
         />
       }
       else{
-         return <div>HELLO.</div>
+         return <div>HELLO HOME.</div>
       }
-  }
-
-  componentDidMount() {
-    fetch('/api/games',
-        {
-            headers: {
-                "Authorization" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTYyMDAzMzAwLCJleHAiOjE1NjI2MDgxMDB9.3zIubcGYHJrPrwa_b-87oQV5XRtBy9bPOOO_m5Mbmlrwh5eCCcuH3Eb9KFJAc3ByKM7rx9mXi8XEAiIZalojiA"
-            },
-        }).then(res => res.json()).then((games) => {
-      this.setState({games: games});
-    })
-    fetch('/api/tips',
-        {
-            headers: {
-                "Authorization" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTYyMDAzMzAwLCJleHAiOjE1NjI2MDgxMDB9.3zIubcGYHJrPrwa_b-87oQV5XRtBy9bPOOO_m5Mbmlrwh5eCCcuH3Eb9KFJAc3ByKM7rx9mXi8XEAiIZalojiA"
-            },
-        }).then(res => res.json()).then((tips) => {
-      this.setState({tips:tips});
-    })
   }
 }
 

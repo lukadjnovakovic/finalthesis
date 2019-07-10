@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './Home';
 import * as serviceWorker from './serviceWorker';
-import Login from "./Login";
+import LoginOld from "./LoginOld";
+import Main from "./Main";
 
-ReactDOM.render(<Login />, document.getElementById('root'));
+ReactDOM.render(<Main />, document.getElementById('root'));
 {/*<Route path="/home" exact component={Home} />,*/}
-{/*<Route path="/login" exact component={Login} />*/}
+{/*<Route path="/login" exact component={LoginOld} />*/}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

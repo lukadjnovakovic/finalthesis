@@ -4,6 +4,7 @@ import dto.UserDTO;
 import mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,9 +40,6 @@ public class AuthController {
     @Autowired
     UserMapper userMapper;
 
-//    @Autowired
-//    RoleRepository roleRepository;
-
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -64,7 +62,7 @@ public class AuthController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         System.out.println(signUpRequest.getUsername());
         if(userService.returnUserByUsername(signUpRequest.getUsername())!=null) {

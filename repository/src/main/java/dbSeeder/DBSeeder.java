@@ -18,8 +18,6 @@ public class DBSeeder implements CommandLineRunner {
     @Autowired
     TeamRepo teamRepo;
     @Autowired
-    UserRepo userRepo;
-    @Autowired
     TipRepo tipRepo;
     @Autowired
     GameRepo gameRepo;
@@ -37,8 +35,6 @@ public class DBSeeder implements CommandLineRunner {
         Competition co1 = new Competition("Premier League");
         Competition co2 = new Competition("Primera");
         Competition co3 = new Competition("Serie A");
-
-        UserEntity user = new UserEntity("Luka","Novakovic","luka","luka");
 
         TipEntity t1 = new TipEntity("1");
         TipEntity tx = new TipEntity("X");
@@ -77,7 +73,6 @@ public class DBSeeder implements CommandLineRunner {
         competitionRepo.save(co2);
         competitionRepo.save(co3);
 
-        userRepo.save(user);
 
         tipRepo.save(t1);
         tipRepo.save(tx);

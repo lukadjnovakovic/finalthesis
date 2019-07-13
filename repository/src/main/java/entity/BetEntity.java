@@ -1,5 +1,7 @@
 package entity;
 
+import org.springframework.data.annotation.Reference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,8 +13,7 @@ public class BetEntity {
     private Integer id;
     @ManyToOne
     private OddsEntity odds;
-    @ManyToOne
-    private TicketEntity ticket;
+    private Integer ticket;
 
     public BetEntity() {
     }
@@ -33,11 +34,16 @@ public class BetEntity {
         this.odds = odds;
     }
 
-    public TicketEntity getTicket() {
+    public int getTicket() {
         return ticket;
     }
 
-    public void setTicket(TicketEntity ticket) {
+    public void setTicket(Integer ticket) {
+        this.ticket = ticket;
+    }
+
+    public BetEntity(OddsEntity odds, int ticket) {
+        this.odds = odds;
         this.ticket = ticket;
     }
 }

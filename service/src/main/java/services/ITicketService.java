@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface ITicketService {
 
-    List<TicketDTO> retundAllTickets();
-
+    List<TicketDTO> retundAllTicketsById(Integer id) throws Exception;
 }

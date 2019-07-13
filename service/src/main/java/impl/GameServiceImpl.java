@@ -68,7 +68,7 @@ public class GameServiceImpl implements IGameService {
         int homeGoals = oddsEntity.getGame().getHomeGoals();
         int awayGoals = oddsEntity.getGame().getAwayGoals();
 
-        if (tip.getName().equals("1")) {
+        if (tipName.equals("1")) {
             if (homeGoals > awayGoals) {
                 return true;
             }

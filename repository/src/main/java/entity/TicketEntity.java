@@ -1,5 +1,7 @@
 package entity;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +14,7 @@ public class TicketEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToMany
-    @JoinColumn(name = "ticket_id")
+    @JoinColumn(name = "ticket")
     private List<BetEntity> bets;
     @ManyToOne
     private UserEntity user;

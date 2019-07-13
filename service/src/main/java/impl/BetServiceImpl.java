@@ -38,4 +38,16 @@ public class BetServiceImpl implements IBetService {
         }
         return betMapper.bet2DTO(betEntity);
     }
+
+    @Override
+    public List<BetDTO> returnAllBetsByTicketId(Integer id){
+        List<BetEntity> betEntities = betRepo.findAllByTicket(id);
+        List<BetDTO> betDTOS = new LinkedList<>();
+        for (BetEntity betEntity :
+                betEntities) {
+            BetDTO betDTO = betMapper.bet2DTO(betEntity);
+            betDTOS.add(betDTO);
+        }
+        return betDTOS;
+    }
 }

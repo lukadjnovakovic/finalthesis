@@ -16,9 +16,9 @@ public class TicketDTO {
     public TicketDTO() {
     }
 
-    public TicketDTO(List<BetDTO> bets, UserDTO user, double payment, double overallOdds, double win, Date dateOfCreation) {
-        this.bets = bets;
-        this.user = user;
+    public TicketDTO( double payment, double overallOdds, double win, Date dateOfCreation) {
+//        this.bets = bets;
+//        this.user = user;
         this.payment = payment;
         this.overallOdds = overallOdds;
         this.win = win;

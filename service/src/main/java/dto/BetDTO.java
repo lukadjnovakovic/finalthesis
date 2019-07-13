@@ -4,12 +4,12 @@ public class BetDTO {
 
     private Integer id;
     private OddsDTO odds;
-    private TicketDTO ticket;
+    private int ticket;
 
     public BetDTO() {
     }
 
-    public BetDTO(OddsDTO odds, TicketDTO ticket) {
+    public BetDTO(OddsDTO odds, int ticket) {
         this.odds = odds;
         this.ticket = ticket;
     }
@@ -30,11 +30,11 @@ public class BetDTO {
         this.id = id;
     }
 
-    public TicketDTO getTicket() {
+    public int getTicket() {
         return ticket;
     }
 
-    public void setTicket(TicketDTO ticket) {
+    public void setTicket(int ticket) {
         this.ticket = ticket;
     }
 }

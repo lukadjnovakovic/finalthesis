@@ -11,6 +11,8 @@ public class GameDTO {
     private TeamDTO awayTeam;
     private CompetitionDTO competition;
     private List<OddsDTO> odds;
+    private int homeGoals;
+    private int awayGoals;
 
     public GameDTO() {
     }
@@ -55,11 +57,29 @@ public class GameDTO {
         this.competition = competition;
     }
 
-    public GameDTO(Date date, TeamDTO homeTeam, TeamDTO awayTeam, CompetitionDTO competition) {
+    public int getHomeGoals() {
+        return homeGoals;
+    }
+
+    public void setHomeGoals(int homeGoals) {
+        this.homeGoals = homeGoals;
+    }
+
+    public int getAwayGoals() {
+        return awayGoals;
+    }
+
+    public void setAwayGoals(int awayGoals) {
+        this.awayGoals = awayGoals;
+    }
+
+    public GameDTO(Date date, TeamDTO homeTeam, TeamDTO awayTeam, CompetitionDTO competition,int homeGoals,int awayGoals) {
         this.date = date;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.competition = competition;
+        this.homeGoals = homeGoals;
+        this.awayGoals = awayGoals;
     }
 
     public List<OddsDTO> getOdds() {

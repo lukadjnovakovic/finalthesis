@@ -1,5 +1,7 @@
 package entity;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,7 +12,7 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     @ManyToOne
     private TeamEntity homeTeam;
@@ -18,6 +20,9 @@ public class Game {
     private TeamEntity awayTeam;
     @ManyToOne
     private Competition competition;
+    private int homeGoals;
+    private int awayGoals;
+
 
     public Game() {
     }
@@ -62,10 +67,28 @@ public class Game {
         this.competition = competition;
     }
 
-    public Game(Date date, TeamEntity homeTeam, TeamEntity awayTeam, Competition competition) {
+    public int getHomeGoals() {
+        return homeGoals;
+    }
+
+    public void setHomeGoals(int homeGoals) {
+        this.homeGoals = homeGoals;
+    }
+
+    public int getAwayGoals() {
+        return awayGoals;
+    }
+
+    public void setAwayGoals(int awayGoals) {
+        this.awayGoals = awayGoals;
+    }
+
+    public Game(Date date, TeamEntity homeTeam, TeamEntity awayTeam, Competition competition,int homeGoals, int awayGoals) {
         this.date = date;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.competition = competition;
+        this.homeGoals = homeGoals;
+        this.awayGoals = awayGoals;
     }
 }

@@ -6,6 +6,7 @@ public class OddsDTO {
     private GameDTO game;
     private TipDTO tip;
     private double odds;
+    private boolean passed;
 
     public OddsDTO() {
     }
@@ -42,9 +43,18 @@ public class OddsDTO {
         this.odds = odds;
     }
 
-    public OddsDTO(GameDTO game, TipDTO tip, double odds) {
+    public boolean isPassed() {
+        return passed;
+    }
+
+    public void setPassed(boolean passed) {
+        this.passed = passed;
+    }
+
+    public OddsDTO(GameDTO game, TipDTO tip, double odds,boolean passed) {
         this.game = game;
         this.tip = tip;
         this.odds = odds;
+        this.passed = passed;
     }
 }

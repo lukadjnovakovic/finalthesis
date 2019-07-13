@@ -1,5 +1,7 @@
 package entity;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,8 @@ public class OddsEntity {
     @OneToOne
     private TipEntity tip;
     private double odds;
+    @Nullable
+    private boolean passed;
 
     public OddsEntity() {
     }
@@ -50,9 +54,18 @@ public class OddsEntity {
         this.odds = odds;
     }
 
-    public OddsEntity(Game game, TipEntity tip, double odds) {
+    public boolean isPassed() {
+        return passed;
+    }
+
+    public void setPassed(boolean passed) {
+        this.passed = passed;
+    }
+
+    public OddsEntity(Game game, TipEntity tip, double odds,boolean passed) {
         this.game = game;
         this.tip = tip;
         this.odds = odds;
+        this.passed = passed;
     }
 }

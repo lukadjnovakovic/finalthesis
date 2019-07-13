@@ -48,22 +48,22 @@ public class DBSeeder implements CommandLineRunner {
         TeamEntity tm3 = new TeamEntity("Arsenal",c3);
         TeamEntity tm4 = new TeamEntity("QPR",c3);
 
-        Game g1 = new Game(new Date(),tm1,tm2,co2);
-        Game g2 = new Game(new Date(),tm3,tm4,co1);
+        Game g1 = new Game(new Date(),tm1,tm2,co2,2,1);
+        Game g2 = new Game(new Date(),tm3,tm4,co1,2,0);
 
-        OddsEntity odds1 = new OddsEntity(g1,t1,2.25);
-        OddsEntity odds2 = new OddsEntity(g1,tx,2.25);
-        OddsEntity odds3 = new OddsEntity(g1,t2,2.25);
-        OddsEntity odds4 = new OddsEntity(g1,tgg,2.25);
-        OddsEntity odds5 = new OddsEntity(g1,tOver,2.25);
-        OddsEntity odds6 = new OddsEntity(g1,tCmb,4.25);
+        OddsEntity odds1 = new OddsEntity(g1,t1,2.25,false);
+        OddsEntity odds2 = new OddsEntity(g1,tx,2.25,false);
+        OddsEntity odds3 = new OddsEntity(g1,t2,2.25,false);
+        OddsEntity odds4 = new OddsEntity(g1,tgg,2.25,false);
+        OddsEntity odds5 = new OddsEntity(g1,tOver,2.25,false);
+        OddsEntity odds6 = new OddsEntity(g1,tCmb,4.25,false);
 
-        OddsEntity odds11 = new OddsEntity(g2,t1,2.25);
-        OddsEntity odds12 = new OddsEntity(g2,tx,2.25);
-        OddsEntity odds13 = new OddsEntity(g2,t2,2.25);
-        OddsEntity odds14 = new OddsEntity(g2,tgg,2.25);
-        OddsEntity odds15 = new OddsEntity(g2,tOver,2.25);
-        OddsEntity odds16 = new OddsEntity(g2,tCmb,5.25);
+        OddsEntity odds11 = new OddsEntity(g2,t1,2.25,false);
+        OddsEntity odds12 = new OddsEntity(g2,tx,2.25,false);
+        OddsEntity odds13 = new OddsEntity(g2,t2,2.25,false);
+        OddsEntity odds14 = new OddsEntity(g2,tgg,2.25,false);
+        OddsEntity odds15 = new OddsEntity(g2,tOver,2.25,false);
+        OddsEntity odds16 = new OddsEntity(g2,tCmb,5.25,false);
 
         countryRepo.save(c1);
         countryRepo.save(c2);

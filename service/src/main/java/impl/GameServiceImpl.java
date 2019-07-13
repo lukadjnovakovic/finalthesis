@@ -4,6 +4,7 @@ import dto.GameDTO;
 import dto.OddsDTO;
 import entity.Game;
 import entity.OddsEntity;
+import entity.TipEntity;
 import mappers.GameMapper;
 import mappers.OddsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,15 +36,45 @@ public class GameServiceImpl implements IGameService {
 
         for (Game game : gameEntities) {
             List<OddsEntity> odds = oddsRepo.findAllByGame_Id(game.getId());
+            //if rezultat
+            odds = processOdds(odds);
+
             List<OddsDTO> oddsDTOS = new LinkedList<>();
             for (OddsEntity odd : odds) {
                 oddsDTOS.add(oddsMapper.odds2DTO(odd));
             }
             GameDTO gameDTO = gameMapper.game2DTO(game);
+
             gameDTO.setOdds(oddsDTOS);
             gameDTOS.add(gameDTO);
         }
         return gameDTOS;
+    }
+
+    private List<OddsEntity> processOdds(List<OddsEntity> odds) {
+
+        for (OddsEntity oddsEntity :
+                odds) {
+            TipEntity tip = oddsEntity.getTip();
+            oddsEntity.setPassed(isOddsPassed(tip, oddsEntity));
+        }
+
+        return odds;
+    }
+
+    private boolean isOddsPassed(TipEntity tip, OddsEntity oddsEntity) {
+
+        String tipName = tip.getName();
+        int homeGoals = oddsEntity.getGame().getHomeGoals();
+        int awayGoals = oddsEntity.getGame().getAwayGoals();
+
+        if (tip.getName().equals("1")) {
+            if (homeGoals > awayGoals) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

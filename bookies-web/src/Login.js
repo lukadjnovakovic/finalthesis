@@ -3,6 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import axios from "axios";
+import Home from "./Home.js";
 
 export default class Login extends Component {
     constructor(props){
@@ -15,32 +17,30 @@ export default class Login extends Component {
     }
 
     handleClick(event,e){
+        var apiBaseUrl = "http://localhost:8081/api/auth";
         var payload={
             "username":this.state.username,
             "password":this.state.password
         }
         // e.preventDefault();
-        try {
-            fetch('http://localhost:8081/api/auth/login',
-                {
-                    method: 'POST',
-                    headers: {
-                        // 'Accept': 'aplication/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({username: this.state.username, password: this.state.password})
+        axios.post(apiBaseUrl+'/login', payload)
+            .then(function (response) {
+                console.log(response);
+                if(response.status == 200){
+                    console.log("login successfull");
+                    var loginscreen=[];
+                    loginscreen.push(<Home parentContext={this}/>);
+                    var loginmessage = "Log in and piss off...";
+                    this.props.parentContext.setState({loginscreen:loginscreen,
+                        loginmessage:loginmessage,
+                        buttonLabel:"Register",
+                        isLogin:true
+                    });
                 }
-            ).then((res) => res.json()
-            ).then(
-                x=>this.props.setToken(x.accessToken)
-                //x=>console.log(x)
-            );
-
-            // ).then(x => this.setState({token: x.body.accessToken}));
-
-        }catch(e){
-            console.log(e);
-        }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     render() {

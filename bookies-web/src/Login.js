@@ -28,16 +28,11 @@ export default class Login extends Component {
                 console.log(response);
                 if(response.status == 200){
                     console.log("login successfull");
-                    var loginscreen=[];
-                    loginscreen.push(<Home parentContext={this}/>);
-                    var loginmessage = "Log in and piss off...";
-                    this.props.parentContext.setState({loginscreen:loginscreen,
-                        loginmessage:loginmessage,
-                        buttonLabel:"Register",
-                        isLogin:true
-                    });
+                    console.log(response.accessToken);
+                    this.props.setToken(response.data.accessToken);
+
                 }
-            })
+            }.bind(this))
             .catch(function (error) {
                 console.log(error);
             });

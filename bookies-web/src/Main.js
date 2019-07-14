@@ -14,6 +14,7 @@ export default class Main extends Component {
 
     setToken(token){
         this.setState({token:token});
+        this.forceUpdate();
     }
 
     render(){

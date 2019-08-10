@@ -1,23 +1,11 @@
 import React from 'react';
 import './Home.css';
-import  ReactTable from 'react-table';
+import Matches from "./Matches";
+import Ticket from './Ticket';
 import  'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Button, ListGroup } from 'react-bootstrap';
 
 var api_base='http://localhost:8081';
-
-function Cell(props){
-    let data = props.value.data;
-    let selectedTip = data.tips.filter(x => x.tip === props.tip)[0];
-    let variant = !selectedTip.isSelected ? "info" : "success";
-    variant = data.isOver ? "secondary" : variant;
-    return (
-        <Button onClick={()=>props.onClick(props.value, props.tip)} disabled={data.isOver} variant={variant}>
-            {selectedTip.odds}
-        </Button>
-    );
-}
 
 export class Home extends React.Component {
 
@@ -33,14 +21,9 @@ export class Home extends React.Component {
         console.log("\n");
 
         this.setState(state => {
-            //console.log(state);
-            const newState = state.tables[data.league].filter(x => x.id === cell.id)[0].data.tips.map(x => {
+            const newState = state.matches[data.league].filter(x => x.id === cell.id)[0].data.tips.map(x => {
                 if (x.tip === tip) {
-                    if (x.isSelected) {
-                        x.isSelected = false;
-                    } else {
-                        x.isSelected = true;
-                    }
+                    x.isSelected = !x.isSelected;
                 } else if (x.isSelected === true) {
                     x.isSelected = false;
                 }
@@ -53,8 +36,9 @@ export class Home extends React.Component {
         }, () => {
 
             const ticket = [];
-            Object.keys(this.state.tables).forEach(function (league) {
-                this.state.tables[league].forEach(function (game) {
+            let oddsOverall = 1;
+            Object.keys(this.state.matches).forEach(function (league) {
+                this.state.matches[league].forEach(function (game) {
                     game.data.tips.forEach(function (tip) {
                         if (tip.isSelected) {
                             ticket.push({
@@ -63,16 +47,23 @@ export class Home extends React.Component {
                                 away: game.data.awayTeam,
                                 tip: tip.tip,
                                 odds: tip.odds,
+                                id: game.id,
                             });
+                            oddsOverall = oddsOverall*tip.odds;
                         }
                     });
                 });
             }.bind(this));
-            this.setState({
-                ticket: ticket,
-            });
-        });
 
+            this.setState(
+                {
+                    ticket: ticket,
+                    oddsOverall: oddsOverall,
+                    win: this.state.amount ? this.state.amount*oddsOverall : "",
+                },
+                    () => {console.log(this.state.oddsOverall)}
+                );
+        });
     }
 
     constructor(props) {
@@ -80,9 +71,26 @@ export class Home extends React.Component {
         this.state = {
             games: null,
             tips: null,
-            tables: null,
+            matches: null,
             ticket: [],
+            amount: "",
+            win: "",
+            oddsOverall: 1,
         }
+    }
+
+    setAmount(amount){
+        this.setState({
+            amount:amount,
+        });
+        console.log(amount);
+    }
+
+    setWin(win){
+        this.setState({
+            win:win,
+        });
+        console.log(win);
     }
 
     componentDidMount() {
@@ -119,15 +127,13 @@ export class Home extends React.Component {
                                 return t.name;
                             });
 
-                            //console.log(tips);
-
                             // take tables object
-                            let tables = {}
+                            let matches = {}
                             this.state.games.forEach(function (game, index) {
                                 let row = {};
-                                let _game = {};
-                                _game.data = row;
-                                _game.id = game.id;
+                                let currentGame = {};
+                                currentGame.data = row;
+                                currentGame.id = game.id;
                                 row.tips = [];
                                 tips.forEach(function (tip, index) {
                                     //console.log(item);
@@ -143,16 +149,16 @@ export class Home extends React.Component {
                                 row.isOver = false;
                                 row.league = game.competition.name;
 
-                                if (!tables.hasOwnProperty(game.competition.name)) {
-                                    tables[game.competition.name] = [];
+                                if (!matches.hasOwnProperty(game.competition.name)) {
+                                    matches[game.competition.name] = [];
                                 }
-                                tables[game.competition.name].push(_game);
+                                matches[game.competition.name].push(currentGame);
                             });
 
                             this.setState(
-                                {tables: tables},
+                                {matches: matches},
                                 () => {
-                                    console.log(this.state.tables)
+                                    console.log(this.state.matches)
                                 },
                             );
                         }
@@ -161,66 +167,22 @@ export class Home extends React.Component {
     }
 
     render() {
-        if (this.state.tables != null) {
-
-            var tables = [];
-
-            Object.keys(this.state.tables).forEach(league => {
-
-                const tipsHeaders = this.state.tips.map((t) => {
-                    return {
-                        Header: t.name,
-                        accessor: y => y,
-                        Cell: y => <Cell onClick={(x, y) => this.handleCellClick(x, y)} tip={t.name}
-                                         value={y.value}> </Cell>,
-                        id: t.name,
-                        resizable: false,
-                        sortable: false,
-                    }
-                });
-                const columns = [
-                    {
-                        id: 'homeTeam',
-                        Header: "Home",
-                        accessor: x => x.data.homeTeam,
-                        width: 250,
-                        resizable: false,
-                        sortable: true,
-                    },
-                    {
-                        id: 'awayTeam',
-                        Header: "Away",
-                        accessor: x => x.data.awayTeam,
-                        width: 250,
-                        resizable: false,
-                        sortable: true,
-                    }
-                ].concat(tipsHeaders);
-
-                const _columns = [{
-                    Header: league,
-                    columns: columns,
-                }];
-
-
-                tables = tables.concat(
-                    <ReactTable
-                        data={this.state.tables[league]}
-                        columns={_columns}
-                        defaultPageSize={this.state.tables[league].length > 5 ? 5 : this.state.tables[league].length}
-                        key={league}
-                    />
-                );
-            });
-
-            const ticket = this.state.ticket.map((x) => <ListGroup.Item> {x.home} - { x.away} {x.tip} {x.odds} </ListGroup.Item> );
-
+        if (this.state.matches != null) {
             return (
-                <div>
-                    {tables}
-                    <ListGroup>
-                        {ticket}
-                    </ListGroup>
+                <div className="rowC">
+                    <Matches 
+                        matches={this.state.matches} 
+                        tips={this.state.tips} 
+                        handleCellClick={(x, y) => this.handleCellClick(x, y)} 
+                    />
+                    <Ticket 
+                        ticket={this.state.ticket}
+                        win={this.state.win}
+                        oddsOverall={this.state.oddsOverall}
+                        setAmount={(x) => {this.setAmount(x)}}
+                        setWin={(x)=> {this.setWin(x)}}
+                        amount={this.state.amount}
+                    />
                 </div>
             );
         } else {

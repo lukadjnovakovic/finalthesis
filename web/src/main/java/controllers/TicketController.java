@@ -3,12 +3,16 @@ package controllers;
 
 import dto.TicketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import payload.ApiResponse;
+import payload.SignUpRequest;
 import services.ITicketService;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -23,4 +27,17 @@ public class TicketController {
         int userID= Integer.parseInt(id);
         return ticketService.retundAllTicketsById(userID);
     }
+
+    @PostMapping(value = "/saveTicket",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> registerUser(@RequestBody TicketDTO ticketDTO) {
+
+        System.out.println("TEST************");
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/api/users/{username}")
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+    }
+
 }

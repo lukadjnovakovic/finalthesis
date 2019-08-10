@@ -35,7 +35,7 @@ public class UserServiceImpl implements IUserService {
     public UserDTO returnUserById(int id) throws Exception {
         UserEntity userEntity = userRepo.findById(id).orElse(null);
         if (userEntity == null) {
-            throw new Exception("No country with given ID");
+            throw new Exception("No user with given ID");
         }
         return userMapper.user2DTO(userEntity);
     }

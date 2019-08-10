@@ -10,7 +10,7 @@ var api_base='http://localhost:8081';
 function Cell(props){
     let data = props.value.data;
     let selectedTip = data.tips.filter(x => x.tip === props.tip)[0];
-    let variant = !selectedTip.isSelected ? "success" : "primary";
+    let variant = !selectedTip.isSelected ? "info" : "success";
     variant = data.isOver ? "secondary" : variant;
     return (
         <Button onClick={()=>props.onClick(props.value, props.tip)} disabled={data.isOver} variant={variant}>

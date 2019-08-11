@@ -10,12 +10,6 @@
 .springBeans
 .sts4-cache
 
-### LUKA ###
-repository/
-service/
-target/
-web/
-
 ### IntelliJ IDEA ###
 .idea/
 *.iws

@@ -29,8 +29,8 @@ export default class Login extends Component {
                 if(response.status == 200){
                     console.log("login successfull");
                     console.log(response.accessToken);
+                    console.log(this);
                     this.props.setToken(response.data.accessToken);
-
                 }
             }.bind(this))
             .catch(function (error) {

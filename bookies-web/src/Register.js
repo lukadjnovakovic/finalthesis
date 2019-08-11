@@ -32,17 +32,18 @@ class Register extends Component {
             .then(function (response) {
                 console.log(response);
                 if(response.data.success == true){
-                     console.log("registration successfull");
+                    console.log("registration successfull");
                     var loginscreen=[];
-                    loginscreen.push(<Login parentContext={this}/>);
+                    loginscreen.push(<Login parentContext={this} setToken={this.props.setToken}/>);
                     var loginmessage = "Log in and piss off...";
-                    self.props.parentContext.setState({loginscreen:loginscreen,
+                    self.props.parentContext.setState({
+                        loginscreen:loginscreen,
                         loginmessage:loginmessage,
                         buttonLabel:"Register",
                         isLogin:true
                     });
                 }
-            })
+            }.bind(this))
             .catch(function (error) {
                 console.log(error);
             });

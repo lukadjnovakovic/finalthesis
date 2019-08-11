@@ -22,7 +22,7 @@ export default class Loginscreen extends Component {
         var loginmessage;
         if(this.state.isLogin){
             var loginscreen=[];
-            loginscreen.push(<Register parentContext={this}/>);
+            loginscreen.push(<Register parentContext={this} setToken={this.props.setToken}/>);
             loginmessage = "Already registered.Go to Login";
             this.setState({
                 loginscreen:loginscreen,
@@ -53,6 +53,7 @@ export default class Loginscreen extends Component {
             loginmessage:loginmessage
         })
     }
+
     render() {
         return (
             <div className="loginscreen">
@@ -69,6 +70,7 @@ export default class Loginscreen extends Component {
         );
     }
 }
+
 const style = {
     margin: 15,
 };

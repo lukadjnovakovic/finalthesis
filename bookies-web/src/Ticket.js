@@ -2,8 +2,23 @@ import React from 'react';
 import ReactTable from 'react-table';
 import  'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import './Ticket.css';
+import { useAlert } from 'react-alert';
+
+const CreateTicketButton = (props) =>{
+    const alert = useAlert()
+    return (
+        <div className="wrapper">
+        <Button
+         onClick={() => props.createTicket(alert)}
+         className="send"
+         variant="success">
+            Make ticket
+        </Button>
+        </div>
+    )
+}    
 
 export class Ticket extends React.Component{
     // props ticket win oddsOverall setAmount
@@ -34,6 +49,7 @@ export class Ticket extends React.Component{
 
         let ticketTable = null;
         let form = null;
+        let create = null;
         if (this.props.ticket.length > 0){ 
             ticketTable = 
                 <ReactTable
@@ -70,12 +86,25 @@ export class Ticket extends React.Component{
                          />
                     </Form.Group>
                 </Form>
+                <Form onSubmit={e => { e.preventDefault(); }}>
+                    <Form.Group>
+                        <Form.Label>Total odds:</Form.Label>
+                        <Form.Control 
+                            type="number" 
+                            value={this.props.oddsOverall}
+                            placeholder="Odds"
+                            readOnly
+                         />
+                    </Form.Group>
+                </Form>
                 </div>
+            create = <CreateTicketButton createTicket={this.props.createTicket}/>;
         }
         return (
             <div>
                 {form}
                 {ticketTable}
+                {create}
             </div>
         );
     }

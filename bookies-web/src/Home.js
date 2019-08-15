@@ -4,21 +4,35 @@ import Matches from "./Matches";
 import Ticket from './Ticket';
 import  'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Badge } from 'react-bootstrap';
 
-var api_base='http://localhost:8081';
+const api_base='http://localhost:8081';
 
 export class Home extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            games: null,
+            tips: null,
+            matches: null,
+            ticket: [],
+            amount: "",
+            win: "",
+            oddsOverall: 1,
+        }
+    }
 
     handleCellClick(cell, tip) {
         let data = cell.data;
         let selectedTip = data.tips.filter(x => x.tip === tip)[0];
 
-        console.log("odds " + selectedTip.odds);
-        console.log("isOver " + data.isOver);
-        console.log("tip " + selectedTip.tip);
-        console.log("league " + data.league);
-        console.log("match " + cell.id);
-        console.log("\n");
+        //console.log("odds " + selectedTip.odds);
+        //console.log("isOver " + data.isOver);
+        //console.log("tip " + selectedTip.tip);
+        //console.log("league " + data.league);
+        //console.log("match " + cell.id);
+        //console.log("\n");
 
         this.setState(state => {
             const newState = state.matches[data.league].filter(x => x.id === cell.id)[0].data.tips.map(x => {
@@ -66,20 +80,10 @@ export class Home extends React.Component {
         });
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            games: null,
-            tips: null,
-            matches: null,
-            ticket: [],
-            amount: "",
-            win: "",
-            oddsOverall: 1,
-        }
-    }
-
     setAmount(amount){
+        if (amount!=null && amount <0){
+            amount = -amount;
+        }
         this.setState({
             amount:amount,
         });
@@ -91,6 +95,19 @@ export class Home extends React.Component {
             win:win,
         });
         console.log(win);
+    }
+
+    createTicket(alert){
+        // todo
+        // send data to backend
+        //console.log(this.state.ticket);
+        //console.log(this.state.oddsOverall);
+        //console.log(this.state.amount);
+        if (!this.state.amount || this.state.amount == 0){
+            alert.error(<div>Place your bet!</div>)
+            return;
+        }
+        console.log(api_base);
     }
 
     componentDidMount() {
@@ -146,8 +163,10 @@ export class Home extends React.Component {
 
                                 row.homeTeam = game.homeTeam.name;
                                 row.awayTeam = game.awayTeam.name;
-                                row.isOver = false;
+                                row.isOver = false;//game.homeGoals===null && game.awayGoals===null ? false : true;
                                 row.league = game.competition.name;
+                                row.homeGoals = game.homeGoals;
+                                row.awayGoals = game.awayGoals;
 
                                 if (!matches.hasOwnProperty(game.competition.name)) {
                                     matches[game.competition.name] = [];
@@ -182,6 +201,7 @@ export class Home extends React.Component {
                         setAmount={(x) => {this.setAmount(x)}}
                         setWin={(x)=> {this.setWin(x)}}
                         amount={this.state.amount}
+                        createTicket={(x) => this.createTicket(x)}
                     />
                 </div>
             );

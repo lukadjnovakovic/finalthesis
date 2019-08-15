@@ -4,8 +4,25 @@ import './index.css';
 import Home from './Home';
 import * as serviceWorker from './serviceWorker';
 import Main from "./Main";
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic';
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+const options = {
+    // you can also just use 'bottom center'
+    position: positions.BOTTOM_CENTER,
+    timeout: 100000,
+    offset: '30px',
+    // you can also just use 'scale'
+    transition: transitions.SCALE
+  }
+
+  const Root = () => (
+    <AlertProvider template={AlertTemplate} {...options}>
+      <Main />
+    </AlertProvider>
+  )
+
+ReactDOM.render(<Root />, document.getElementById('root'));
 {/*<Route path="/home" exact component={Home} />,*/}
 {/*<Route path="/login" exact component={LoginOld} />*/}
 

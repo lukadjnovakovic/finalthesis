@@ -5,3 +5,13 @@
   -webkit-appearance: none; 
   margin: 0; 
 }
+
+
+.wrapper{
+  position:relative;
+}
+  
+.send{
+  position:absolute;
+  left:calc(50% - 50px);
+}

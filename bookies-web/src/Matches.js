@@ -54,6 +54,14 @@ export class Matches extends React.Component {
                     width: 150,
                     resizable: false,
                     sortable: true,
+                },
+                {
+                    id: 'score',
+                    Header: "Score",
+                    accessor: x => x.data.isOver ? x.data.homeGoals + " - " + x.data.awayGoals : "",
+                    width: 150,
+                    resizable: false,
+                    sortable: true,
                 }
             ].concat(columnsTips);
 

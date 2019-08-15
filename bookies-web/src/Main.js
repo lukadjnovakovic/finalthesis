@@ -20,7 +20,7 @@ export default class Main extends Component {
         //this.setState({token:token});
         sessionStorage.setItem("token", token);
         this.forceUpdate();
-        console.log("FORCE UPDATE!")
+        //console.log("FORCE UPDATE!")
     }
 
     isTokenMissing(){

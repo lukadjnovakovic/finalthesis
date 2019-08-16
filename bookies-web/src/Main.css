@@ -1,0 +1,28 @@
+body
+{
+  background-color: #fcfcfc;
+}
+.center-div
+{
+  position: relative;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  height: 90%;
+  background-color: #fcfcfc;
+  border-radius: 3px;
+  padding:2%;
+}
+
+.login-div{
+    position: relative;
+}
+
+.brand {
+    color: #17a2b8;
+    text-shadow: #17a2b8;
+    font-weight:bold;
+}

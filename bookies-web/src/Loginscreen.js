@@ -1,56 +1,57 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//import RaisedButton from 'material-ui/RaisedButton';
 import Login from './Login';
+import { Button } from 'react-bootstrap';
 import Register from './Register';
+import './Ticket.css';
 
 export default class Loginscreen extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            username:'',
-            password:'',
-            loginscreen:[],
-            loginmessage:'',
-            buttonLabel:'Register',
-            isLogin:true
+        this.state = {
+            username: '',
+            password: '',
+            loginscreen: [],
+            loginmessage: '',
+            buttonLabel: 'To Register',
+            isLogin: true
         }
     }
 
-    handleClick(event){
+    handleClick(event) {
         // console.log("event",event);
         var loginmessage;
-        if(this.state.isLogin){
-            var loginscreen=[];
-            loginscreen.push(<Register parentContext={this} setToken={this.props.setToken}/>);
-            loginmessage = "Already registered.Go to Login";
+        var loginscreen = [];
+        if (this.state.isLogin) {
+            loginscreen.push(<Register parentContext={this} setToken={this.props.setToken} />);
+            loginmessage = "Already registered? Go to Login!";
             this.setState({
-                loginscreen:loginscreen,
-                loginmessage:loginmessage,
-                buttonLabel:"Login",
-                isLogin:false
+                loginscreen: loginscreen,
+                loginmessage: loginmessage,
+                buttonLabel: "To Login",
+                isLogin: false
             })
         }
-        else{
-            var loginscreen=[];
-            loginscreen.push(<Login parentContext={this} appContext={this.props.parentContext} setToken={this.props.setToken}/>);
-            loginmessage = "Not Registered yet.Go to registration";
+        else {
+            loginscreen.push(<Login parentContext={this} appContext={this.props.parentContext} setToken={this.props.setToken} />);
+            loginmessage = "Not Registered yet? Go to registration!";
             this.setState({
-                loginscreen:loginscreen,
-                loginmessage:loginmessage,
-                buttonLabel:"Register",
-                isLogin:true
+                loginscreen: loginscreen,
+                loginmessage: loginmessage,
+                buttonLabel: " To Register",
+                isLogin: true
             })
         }
     }
 
-    componentWillMount(){
-        var loginscreen=[];
-        loginscreen.push(<Login parentContext={this} appContext={this.props.parentContext} setToken={this.props.setToken}/>);
-        var loginmessage = "Not registered yet, Register Now";
+    componentWillMount() {
+        var loginscreen = [];
+        loginscreen.push(<Login key="inital" parentContext={this} appContext={this.props.parentContext} setToken={this.props.setToken} />);
+        var loginmessage = "Not registered yet? Register Now!";
         this.setState({
-            loginscreen:loginscreen,
-            loginmessage:loginmessage
+            loginscreen: loginscreen,
+            loginmessage: loginmessage
         })
     }
 
@@ -59,18 +60,15 @@ export default class Loginscreen extends Component {
             <div className="loginscreen">
                 {this.state.loginscreen}
                 <div>
-                    {this.state.loginmessage}
-                    <MuiThemeProvider>
-                        <div>
-                            <RaisedButton label={this.state.buttonLabel} primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-                        </div>
-                    </MuiThemeProvider>
+                    <div className="ctext">
+                     {this.state.loginmessage}
+                    </div>
+                    <hr />
+                    <div>
+                        <Button className="cbutton" variant="outline-info" onClick={(event) => this.handleClick(event)}> {this.state.buttonLabel} </Button>
+                    </div>
                 </div>
             </div>
         );
     }
 }
-
-const style = {
-    margin: 15,
-};

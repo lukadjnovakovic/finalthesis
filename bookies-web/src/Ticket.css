@@ -11,7 +11,13 @@
   position:relative;
 }
   
-.send{
-  position:absolute;
-  left:calc(50% - 50px);
+.cbutton{
+  position:relative;
+  left:calc(50% - 100px);
+  width:200px;
+}
+
+.ctext{
+  text-align: center;
+  margin-top: 5px;
 }

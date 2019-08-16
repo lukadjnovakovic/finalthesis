@@ -4,7 +4,6 @@ import Matches from "./Matches";
 import Ticket from './Ticket';
 import  'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Badge } from 'react-bootstrap';
 
 const api_base='http://localhost:8081';
 
@@ -25,7 +24,7 @@ export class Home extends React.Component {
 
     handleCellClick(cell, tip) {
         let data = cell.data;
-        let selectedTip = data.tips.filter(x => x.tip === tip)[0];
+        //let selectedTip = data.tips.filter(x => x.tip === tip)[0];
 
         //console.log("odds " + selectedTip.odds);
         //console.log("isOver " + data.isOver);
@@ -103,7 +102,7 @@ export class Home extends React.Component {
         //console.log(this.state.ticket);
         //console.log(this.state.oddsOverall);
         //console.log(this.state.amount);
-        if (!this.state.amount || this.state.amount == 0){
+        if (!this.state.amount || this.state.amount === 0){
             alert.error(<div>Place your bet!</div>)
             return;
         }

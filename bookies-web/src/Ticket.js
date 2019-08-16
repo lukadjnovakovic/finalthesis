@@ -12,7 +12,7 @@ const CreateTicketButton = (props) =>{
         <div className="wrapper">
         <Button
          onClick={() => props.createTicket(alert)}
-         className="send"
+         className="cbutton"
          variant="success">
             Make ticket
         </Button>
@@ -58,7 +58,6 @@ export class Ticket extends React.Component{
                     pageSize={this.props.ticket.length}
                     showPageJump={false}
                     showPageSizeOptions={false}
-                    showPageJump={false}
                     showPagination={false}
                 />;
 

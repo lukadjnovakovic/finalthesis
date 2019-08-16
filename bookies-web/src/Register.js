@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//import AppBar from 'material-ui/AppBar';
+//import RaisedButton from 'material-ui/RaisedButton';
+//import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import Login from './Login';
+import { Form, Button } from 'react-bootstrap';
+import './Ticket.css';
 
 class Register extends Component {
     constructor(props) {
@@ -17,30 +19,30 @@ class Register extends Component {
         }
     }
 
-    handleClick(event){
+    handleClick(event) {
         var apiBaseUrl = "http://localhost:8081/api/auth";
-        console.log("values",this.state.first_name,this.state.last_name,this.state.username,this.state.password);
         //To be done:check for empty values before hitting submit
         var self = this;
-        var payload={
+        var payload = {
             "name": this.state.first_name,
-            "surname":this.state.last_name,
-            "username":this.state.username,
-            "password":this.state.password
+            "surname": this.state.last_name,
+            "username": this.state.username,
+            "password": this.state.password
         }
-        axios.post(apiBaseUrl+'/signup', payload)
+        console.log(payload);
+        axios.post(apiBaseUrl + '/signup', payload)
             .then(function (response) {
                 console.log(response);
-                if(response.data.success == true){
+                if (response.data.success === true) {
                     console.log("registration successfull");
-                    var loginscreen=[];
-                    loginscreen.push(<Login parentContext={this} setToken={this.props.setToken}/>);
-                    var loginmessage = "Log in and piss off...";
+                    var loginscreen = [];
+                    loginscreen.push(<Login parentContext={this} setToken={this.props.setToken} />);
+                    var loginmessage = "Successful registration!";
                     self.props.parentContext.setState({
-                        loginscreen:loginscreen,
-                        loginmessage:loginmessage,
-                        buttonLabel:"Register",
-                        isLogin:true
+                        loginscreen: loginscreen,
+                        loginmessage: loginmessage,
+                        buttonLabel: "To Register",
+                        isLogin: true
                     });
                 }
             }.bind(this))
@@ -52,44 +54,49 @@ class Register extends Component {
     render() {
         return (
             <div>
-                <MuiThemeProvider>
-                    <div>
-                        <AppBar
-                            title="Register"
-                        />
-                        <TextField
-                            hintText="Enter your First Name"
-                            floatingLabelText="First Name"
-                            onChange = {(event,newValue) => this.setState({first_name:newValue})}
-                        />
-                        <br/>
-                        <TextField
-                            hintText="Enter your Last Name"
-                            floatingLabelText="Last Name"
-                            onChange = {(event,newValue) => this.setState({last_name:newValue})}
-                        />
-                        <br/>
-                        <TextField
-                            hintText="Enter your Username"
-                            floatingLabelText="Username"
-                            onChange = {(event,newValue) => this.setState({username:newValue})}
-                        />
-                        <br/>
-                        <TextField
-                            type = "password"
-                            hintText="Enter your Password"
-                            floatingLabelText="Password"
-                            onChange = {(event,newValue) => this.setState({password:newValue})}
-                        />
-                        <br/>
-                        <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-                    </div>
-                </MuiThemeProvider>
+                <div>
+                    <Form onSubmit={e => { e.preventDefault(); }}>
+                        <Form.Group>
+                            <Form.Control
+                                type="text"
+                                value={this.state.first_name}
+                                onChange={(event) => this.setState({ first_name: event.target.value })}
+                                placeholder="First name"
+                            >
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control
+                                type="text"
+                                value={this.state.last_name}
+                                onChange={(event) => this.setState({ last_name: event.target.value })}
+                                placeholder="Last name"
+                            >
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control
+                                type="text"
+                                value={this.state.username}
+                                onChange={(event) => this.setState({ username: event.target.value })}
+                                placeholder="Username"
+                            >
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control
+                                type="password"
+                                value={this.state.password}
+                                onChange={(event) => this.setState({ password: event.target.value })}
+                                placeholder="Password"
+                            >
+                            </Form.Control>
+                        </Form.Group>
+                    </Form>
+                    <Button className="cbutton" variant="outline-info" onClick={(event) => this.handleClick(event)}> Register! </Button>
+                </div>
             </div>
         );
     }
 }
-const style = {
-    margin: 15,
-};
 export default Register;

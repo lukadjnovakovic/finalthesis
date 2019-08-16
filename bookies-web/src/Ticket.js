@@ -13,7 +13,7 @@ const CreateTicketButton = (props) =>{
         <Button
          onClick={() => props.createTicket(alert)}
          className="cbutton"
-         variant="success">
+         variant="outline-info">
             Make ticket
         </Button>
         </div>

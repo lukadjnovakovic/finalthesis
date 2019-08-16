@@ -7,7 +7,7 @@ import {Button} from 'react-bootstrap';
 function Cell(props){
     let data = props.value.data;
     let selectedTip = data.tips.filter(x => x.tip === props.tip)[0];
-    let variant = !selectedTip.isSelected ? "success" : "primary";
+    let variant = !selectedTip.isSelected ? "outline-info" : "info";
     variant = data.isOver ? "secondary" : variant;
     return (
         <Button 

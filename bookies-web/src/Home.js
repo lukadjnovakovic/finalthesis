@@ -4,6 +4,7 @@ import Matches from "./Matches";
 import Ticket from './Ticket';
 import  'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from "axios";
 
 const api_base='http://localhost:8081';
 
@@ -97,16 +98,37 @@ export class Home extends React.Component {
     }
 
     createTicket(alert){
-        // todo
-        // send data to backend
-        //console.log(this.state.ticket);
-        //console.log(this.state.oddsOverall);
-        //console.log(this.state.amount);
         if (!this.state.amount || this.state.amount === 0){
             alert.error(<div>Place your bet!</div>)
             return;
         }
-        console.log(api_base);
+
+        // prepare request
+        var apiBaseUrl = "http://localhost:8081/api/"; //todo
+        let games = this.state.ticket.map(x =>{
+            return new Object(
+                {
+                    "id": x.id,
+                    "tip":x.tip
+                }
+            );
+        });
+        var payload = {
+            games:games,
+            amount:this.state.amount,
+        }
+
+        // send request
+        axios.post(apiBaseUrl + '/', payload)
+            .then(function (response) {
+                console.log(response);
+                if (response.status === 200) {
+                    console.log("successfully made ticket");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     componentDidMount() {

@@ -44,19 +44,17 @@ export default class Main extends Component {
                         <div className="col-sm-4"></div>
                         <div className="col-sm-4">
                             <Loginscreen setToken={((token) => this.setToken(token))} isTokenMissing={() => this.isTokenMissing()} />
-
                         </div>
                     </div>
                 </div>;
         }
         return (
             <div>
-                <Navbar bg="dark" variant="dark">
+                <Navbar expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="#home">
                         <img
                             alt=""
                             src={require('./logo.png')}
-
                             height="50"
                             className="d-inline-block align-top"
                         />

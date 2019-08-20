@@ -36,6 +36,7 @@ export default class Login extends Component {
             }.bind(this))
             .catch(function (error) {
                 console.log(error);
+                alert(error)
             });
     }
 

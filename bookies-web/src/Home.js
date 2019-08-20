@@ -160,7 +160,7 @@ export class Home extends React.Component {
         let payload = {
             games: games,
             amount: this.state.amount,
-            overallOdds: this.state.overallOdds,
+            oddsOverall: this.state.oddsOverall,
         }
 
         //console.log(payload);

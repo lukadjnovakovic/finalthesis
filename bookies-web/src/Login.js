@@ -23,7 +23,7 @@ export default class Login extends Component {
             "password": this.state.password
         }
         // e.preventDefault();
-        console.log(payload);
+        //console.log(payload);
         axios.post(apiBaseUrl + '/login', payload)
             .then(function (response) {
                 console.log(response);

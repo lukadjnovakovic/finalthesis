@@ -29,11 +29,11 @@ export class Home extends React.Component {
 
     setSelectedGame(matchId, tip, selected) {
         this.setState(state => {
-            const newState = Object.keys(state.matches).forEach(function(league){
-                this.state.matches[league].forEach(function(match){
-                    if (match.data.id === matchId){
-                        match.data.tips.forEach(function(tip){
-                            if (tip.tip === tip){
+            const newState = Object.keys(state.matches).forEach(function (league) {
+                this.state.matches[league].forEach(function (match) {
+                    if (match.data.id === matchId) {
+                        match.data.tips.forEach(function (tip) {
+                            if (tip.tip === tip) {
                                 tip.isSelected = selected;
                             }
                         });
@@ -43,7 +43,7 @@ export class Home extends React.Component {
             return {
                 newState,
             }
-        },()=>{
+        }, () => {
             const ticket = [];
             let oddsOverall = 1;
             Object.keys(this.state.matches).forEach(function (league) {
@@ -142,6 +142,10 @@ export class Home extends React.Component {
     }
 
     createTicket(alert) {
+
+        //console.log(this.state.matches);
+
+
         if (!this.state.amount || this.state.amount === 0) {
             alert.error(<div>Place your bet!</div>)
             return;
@@ -149,24 +153,39 @@ export class Home extends React.Component {
 
         // prepare request
         let apiBaseUrl = "http://localhost:8081/api"; //todo
-        let games = this.state.ticket.map(x => {
-            return new Object(
-                {
-                    "id": x.id,
-                    "tip": this.state.tips.filter(y=>y.name===x.tip)[0].id,
+        let odds = [];
+        Object.keys(this.state.matches).forEach(function (league) {
+            this.state.matches[league].forEach(function (game) {
+                let selected = game.data.tips.filter(x => x.isSelected)[0];
+                if (selected) {
+                    odds.push(new Object(
+                        {
+                            "id": game.data.tips.filter(x => x.isSelected)[0].oddsID,
+                        }
+                    ));
                 }
-            );
-        });
+            });
+        }.bind(this));
+
+        console.log(odds);
+
+
         let payload = {
-            games: games,
+            odds: odds,
             amount: this.state.amount,
             oddsOverall: this.state.oddsOverall,
         }
 
-        //console.log(payload);
+        let config = {
+            headers: {
+                "Authorization": "Bearer " + this.props.token,
+            }
+        }
+
+        console.log(payload);
 
         // send request
-        axios.post(apiBaseUrl + '/saveTicket', payload)
+        axios.post(apiBaseUrl + '/saveTicket', payload, config)
             .then(function (response) {
                 console.log(response);
                 if (response.status === 200) {
@@ -226,6 +245,7 @@ export class Home extends React.Component {
                                     tip: tip,
                                     odds: game.odds.filter(x => x.tip.name === tip)[0].odds,
                                     isSelected: false,
+                                    oddsID: game.odds.filter(x => x.tip.name === tip)[0].id
                                 });
                             });
 

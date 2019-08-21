@@ -158,17 +158,10 @@ export class Home extends React.Component {
             this.state.matches[league].forEach(function (game) {
                 let selected = game.data.tips.filter(x => x.isSelected)[0];
                 if (selected) {
-                    odds.push(new Object(
-                        {
-                            "id": game.data.tips.filter(x => x.isSelected)[0].oddsID,
-                        }
-                    ));
+                    odds.push(game.data.tips.filter(x => x.isSelected)[0].oddsID);
                 }
             });
         }.bind(this));
-
-        console.log(odds);
-
 
         let payload = {
             odds: odds,
@@ -223,8 +216,8 @@ export class Home extends React.Component {
                         this.setState({ tips: tips })
                     })
                     .then(() => {
-                        console.log("FETCHED TIPS:");
-                        console.log(this.state.tips);
+                        //console.log("FETCHED TIPS:");
+                        //console.log(this.state.tips);
 
                         // init tips
                         let tips = this.state.tips.map((t) => {
@@ -265,7 +258,7 @@ export class Home extends React.Component {
                         this.setState(
                             { matches: matches },
                             () => {
-                                console.log(this.state.matches)
+                                //console.log(this.state.matches)
                             },
                         );
                     }

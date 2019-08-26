@@ -7,4 +7,6 @@ import java.util.List;
 public interface IOddsService {
 
     List<OddsDTO> returnAllOdds();
+
+    OddsDTO returOddsDTObyId(int id);
 }

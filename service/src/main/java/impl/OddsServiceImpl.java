@@ -29,4 +29,12 @@ public class OddsServiceImpl implements IOddsService {
         }
         return oddsDTOS;
     }
+
+    @Override
+    public OddsDTO returOddsDTObyId(int id){
+
+        OddsEntity oddsEntity = oddsRepo.findById(id);
+
+        return oddsMapper.odds2DTO(oddsEntity);
+    }
 }

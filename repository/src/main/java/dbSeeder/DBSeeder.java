@@ -79,9 +79,6 @@ public class DBSeeder implements CommandLineRunner {
 
         ticketRepo.save(ticket1);
 
-
-
-
         userRepo.save(user1);
 
 

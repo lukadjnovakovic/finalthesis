@@ -8,4 +8,5 @@ import org.mapstruct.Mapper;
 public interface BetMapper {
 
     BetDTO bet2DTO(BetEntity betEntity);
+    BetEntity bet2Entity(BetDTO betDTO);
 }

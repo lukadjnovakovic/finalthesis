@@ -10,4 +10,5 @@ import java.util.List;
 public interface OddsRepo extends JpaRepository<OddsEntity,Integer> {
 
     List<OddsEntity> findAllByGame_Id(int id);
+    OddsEntity findById(int id);
 }

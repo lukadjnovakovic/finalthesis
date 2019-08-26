@@ -12,4 +12,5 @@ public interface TicketMapper {
 
 //    @Mapping(target = "win", expression = "java(ticketEntity.getPayment() * ticketEntity.getOverallOdds())")
     TicketDTO ticket2DTO(TicketEntity ticketEntity);
+    TicketEntity ticketEntity(TicketDTO ticketDTO);
 }

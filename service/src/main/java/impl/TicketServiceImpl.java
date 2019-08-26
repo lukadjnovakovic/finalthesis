@@ -1,10 +1,8 @@
 package impl;
 
 import dto.BetDTO;
-import dto.OddsDTO;
 import dto.TicketDTO;
 import dto.UserDTO;
-import entity.TeamEntity;
 import entity.TicketEntity;
 import mappers.TicketMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,4 +48,6 @@ public class TicketServiceImpl implements ITicketService {
         return ticketDTOS;
     }
 
+    @Override
+    public TicketEntity saveTicket(TicketEntity ticketEntity){return ticketRepo.save(ticketEntity);};
 }

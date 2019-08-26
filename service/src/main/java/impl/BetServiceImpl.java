@@ -50,4 +50,7 @@ public class BetServiceImpl implements IBetService {
         }
         return betDTOS;
     }
+
+    @Override
+    public void saveBet(BetEntity betEntity){betRepo.save(betEntity);};
 }

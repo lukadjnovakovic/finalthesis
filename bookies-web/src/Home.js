@@ -25,55 +25,6 @@ export class Home extends React.Component {
         }
     }
 
-    // setSelectedGame(matchId, tip, selected) {
-    //     this.setState(state => {
-    //         const newState = Object.keys(state.matches).forEach(function (league) {
-    //             this.state.matches[league].forEach(function (match) {
-    //                 if (match.data.id === matchId) {
-    //                     match.data.tips.forEach(function (tip) {
-    //                         if (tip.tip === tip) {
-    //                             tip.isSelected = selected;
-    //                         }
-    //                     });
-    //                 }
-    //             })
-    //         });
-    //         return {
-    //             newState,
-    //         }
-    //     }, () => {
-    //         const ticket = [];
-    //         let oddsOverall = 1;
-    //         Object.keys(this.state.matches).forEach(function (league) {
-    //             this.state.matches[league].forEach(function (game) {
-    //                 game.data.tips.forEach(function (tip) {
-    //                     if (tip.isSelected) {
-    //                         ticket.push({
-    //                             league: league,
-    //                             home: game.data.homeTeam,
-    //                             away: game.data.awayTeam,
-    //                             tip: tip.tip,
-    //                             odds: tip.odds,
-    //                             id: game.id,
-    //                         });
-    //                         oddsOverall = oddsOverall * tip.odds;
-    //                     }
-    //                 });
-    //             });
-    //         }.bind(this));
-
-    //         this.setState(
-    //             {
-    //                 ticket: ticket,
-    //                 oddsOverall: oddsOverall,
-    //                 win: this.state.amount ? this.state.amount * oddsOverall : "",
-    //             },
-    //             () => { console.log(this.state.oddsOverall) }
-    //         );
-
-    //     });
-    // }
-
     selectLeague(leagueName) {
         this.setState(state => {
             const newState = state.leagues.forEach(function (league) {
@@ -85,6 +36,27 @@ export class Home extends React.Component {
                 newState,
             }
         });
+    }
+
+    clearTicket(){
+        Object.keys(this.state.matches).forEach(function(leagueName){
+            this.setState(state=>{
+                const newState = state.matches[leagueName].map(match=>{
+                    match.data.tips.map(x=>{
+                        x.isSelected = false;
+                    })
+                })
+                return {
+                    newState,
+                }
+            })
+        }.bind(this));
+        this.setState({
+            amount: "",
+            win:"",
+            oddsOverall: 1,
+            ticket:[],
+        })
     }
 
     handleCellClick(cell, tip) {
@@ -196,6 +168,8 @@ export class Home extends React.Component {
             .catch(function (error) {
                 console.log(error);
             });
+
+        this.clearTicket();
     }
 
     componentDidMount() {

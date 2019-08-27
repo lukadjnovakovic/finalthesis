@@ -11,9 +11,10 @@ const CreateTicketButton = (props) =>{
     return (
         <div className="wrapper">
         <Button
-         onClick={() => props.createTicket(alert)}
-         className="cbutton"
-         variant="outline-info">
+            onClick={() => props.createTicket(alert)}
+            className="cbutton"
+            variant="outline-info"
+        >
             Make ticket
         </Button>
         </div>
@@ -97,7 +98,9 @@ export class Ticket extends React.Component{
                     </Form.Group>
                 </Form>
                 </div>
-            create = <CreateTicketButton createTicket={this.props.createTicket}/>;
+            create = <CreateTicketButton 
+                createTicket={this.props.createTicket}
+            />;
         }
         return (
             <div>

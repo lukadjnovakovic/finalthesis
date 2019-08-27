@@ -48,6 +48,7 @@ export default class Main extends Component {
                     </div>
                 </div>;
         }
+        var logout = sessionStorage.getItem("token") ?  <Button variant="outline-info" onClick={() => { sessionStorage.removeItem("token"); this.forceUpdate(); }}>Logout</Button> : null;
         return (
             <div>
                 <Navbar expand="lg" bg="dark" variant="dark">
@@ -64,7 +65,7 @@ export default class Main extends Component {
                     </Nav>
                     <Nav className="mr-auto"></Nav>
                     <Form inline>
-                        <Button variant="outline-info" onClick={() => { sessionStorage.removeItem("token"); this.forceUpdate(); }}>Logout</Button>
+                        {logout}
                     </Form>
                 </Navbar>
                 <br />

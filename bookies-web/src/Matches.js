@@ -76,6 +76,7 @@ export class Matches extends React.Component {
                     columns={columnsMatchesWithTitle}
                     defaultPageSize={this.props.matches[league].length > 5 ? 5 : this.props.matches[league].length}
                     key={league}
+                    showPagination={false}
                 />
             );
         });

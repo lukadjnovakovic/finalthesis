@@ -2,6 +2,7 @@ import React from 'react';
 import './Home.css';
 import Matches from "./Matches";
 import Ticket from './Ticket';
+import Leagues from './Leagues';
 import 'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
@@ -20,59 +21,69 @@ export class Home extends React.Component {
             amount: "", // user created
             win: "", // calculated every time amount changes
             oddsOverall: 1,
+            leagues: null,
         }
     }
 
-    isGameSelected() {
+    // setSelectedGame(matchId, tip, selected) {
+    //     this.setState(state => {
+    //         const newState = Object.keys(state.matches).forEach(function (league) {
+    //             this.state.matches[league].forEach(function (match) {
+    //                 if (match.data.id === matchId) {
+    //                     match.data.tips.forEach(function (tip) {
+    //                         if (tip.tip === tip) {
+    //                             tip.isSelected = selected;
+    //                         }
+    //                     });
+    //                 }
+    //             })
+    //         });
+    //         return {
+    //             newState,
+    //         }
+    //     }, () => {
+    //         const ticket = [];
+    //         let oddsOverall = 1;
+    //         Object.keys(this.state.matches).forEach(function (league) {
+    //             this.state.matches[league].forEach(function (game) {
+    //                 game.data.tips.forEach(function (tip) {
+    //                     if (tip.isSelected) {
+    //                         ticket.push({
+    //                             league: league,
+    //                             home: game.data.homeTeam,
+    //                             away: game.data.awayTeam,
+    //                             tip: tip.tip,
+    //                             odds: tip.odds,
+    //                             id: game.id,
+    //                         });
+    //                         oddsOverall = oddsOverall * tip.odds;
+    //                     }
+    //                 });
+    //             });
+    //         }.bind(this));
 
-    }
+    //         this.setState(
+    //             {
+    //                 ticket: ticket,
+    //                 oddsOverall: oddsOverall,
+    //                 win: this.state.amount ? this.state.amount * oddsOverall : "",
+    //             },
+    //             () => { console.log(this.state.oddsOverall) }
+    //         );
 
-    setSelectedGame(matchId, tip, selected) {
+    //     });
+    // }
+
+    selectLeague(leagueName) {
         this.setState(state => {
-            const newState = Object.keys(state.matches).forEach(function (league) {
-                this.state.matches[league].forEach(function (match) {
-                    if (match.data.id === matchId) {
-                        match.data.tips.forEach(function (tip) {
-                            if (tip.tip === tip) {
-                                tip.isSelected = selected;
-                            }
-                        });
-                    }
-                })
-            });
+            const newState = state.leagues.forEach(function (league) {
+                if (league.name === leagueName) {
+                    league.isSelected = !league.isSelected;
+                }
+            })
             return {
                 newState,
             }
-        }, () => {
-            const ticket = [];
-            let oddsOverall = 1;
-            Object.keys(this.state.matches).forEach(function (league) {
-                this.state.matches[league].forEach(function (game) {
-                    game.data.tips.forEach(function (tip) {
-                        if (tip.isSelected) {
-                            ticket.push({
-                                league: league,
-                                home: game.data.homeTeam,
-                                away: game.data.awayTeam,
-                                tip: tip.tip,
-                                odds: tip.odds,
-                                id: game.id,
-                            });
-                            oddsOverall = oddsOverall * tip.odds;
-                        }
-                    });
-                });
-            }.bind(this));
-
-            this.setState(
-                {
-                    ticket: ticket,
-                    oddsOverall: oddsOverall,
-                    win: this.state.amount ? this.state.amount * oddsOverall : "",
-                },
-                () => { console.log(this.state.oddsOverall) }
-            );
-
         });
     }
 
@@ -142,9 +153,6 @@ export class Home extends React.Component {
     }
 
     createTicket(alert) {
-
-        //console.log(this.state.matches);
-
 
         if (!this.state.amount || this.state.amount === 0) {
             alert.error(<div>Place your bet!</div>)
@@ -226,6 +234,7 @@ export class Home extends React.Component {
 
                         // take tables object
                         let matches = {}
+                        let leagues = new Set([])
                         this.state.games.forEach(function (game, index) {
                             let row = {};
                             let currentGame = {};
@@ -249,16 +258,27 @@ export class Home extends React.Component {
                             row.homeGoals = game.homeGoals;
                             row.awayGoals = game.awayGoals;
 
+                            let league = {}
+                            league.name = game.competition.name;
+                            league.isSelected = false;
+
+                            leagues.add(league);
+
                             if (!matches.hasOwnProperty(game.competition.name)) {
                                 matches[game.competition.name] = [];
                             }
                             matches[game.competition.name].push(currentGame);
                         });
 
+
                         this.setState(
-                            { matches: matches },
+                            {
+                                matches: matches,
+                                leagues: leagues,
+                            },
                             () => {
-                                //console.log(this.state.matches)
+                                //console.log(this.state.matches);
+                                //console.log(this.state.leagues);
                             },
                         );
                     }
@@ -268,10 +288,25 @@ export class Home extends React.Component {
 
     render() {
         if (this.state.matches != null) {
+
+            let matches = {}
+            this.state.leagues.forEach(function(league){
+                if (league.isSelected){
+                    matches[league.name] = this.state.matches[league.name];
+                }
+            }.bind(this));
+            if (!Object.keys(matches).length){
+                matches = this.state.matches;
+            }
+
             return (
                 <div className="rowC">
+                    <Leagues
+                        selectLeague={(x) => this.selectLeague(x)}
+                        allLeagues={this.state.leagues}
+                    />
                     <Matches
-                        matches={this.state.matches}
+                        matches={matches}
                         tips={this.state.tips}
                         handleCellClick={(x, y) => this.handleCellClick(x, y)}
                     />
@@ -283,7 +318,6 @@ export class Home extends React.Component {
                         setWin={(x) => { this.setWin(x) }}
                         amount={this.state.amount}
                         createTicket={(x) => this.createTicket(x)}
-                    //removeGameFromTicket={(x) => this.removeGameFromTicket(x)}
                     />
                 </div>
             );

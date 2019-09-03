@@ -3,6 +3,10 @@ import Home from "./Home";
 import Loginscreen from "./Loginscreen";
 import { Navbar, Form, Button, Nav } from 'react-bootstrap';
 import './Main.css';
+import MyTickets from "./MyTickets";
+import { Router, Route, Link } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
+const history = createHistory();
 
 export default class Main extends Component {
 
@@ -13,16 +17,9 @@ export default class Main extends Component {
         }
     }
 
-    componentDidMount() {
-        //  localStorage.setItem("token", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTYzMDMxMDA0LCJleHAiOjE1NjM2MzU4MDR9.XCit3M3gOAzEBt_y0BbqseH3ISl6HJfNRgKTInCr4N4ua_VqzkHWc2OLGcl2hDdMynD6XrOExaohFxq4n0aIJg");
-        //  this.setState({token: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTYzMDMxMDA0LCJleHAiOjE1NjM2MzU4MDR9.XCit3M3gOAzEBt_y0BbqseH3ISl6HJfNRgKTInCr4N4ua_VqzkHWc2OLGcl2hDdMynD6XrOExaohFxq4n0aIJg"})
-    }
-
     setToken(token) {
-        //this.setState({token:token});
         sessionStorage.setItem("token", token);
         this.forceUpdate();
-        //console.log("FORCE UPDATE!")
     }
 
     isTokenMissing() {
@@ -35,6 +32,12 @@ export default class Main extends Component {
 
     render() {
         var page = <div>Hello main.</div>;
+        var menu = sessionStorage.getItem("token") ?
+            <div>
+                <Link to="/"><Button variant="outline-info">Home</Button></Link>
+                <Link to="/mytickets/"><Button variant="outline-info">My Tickets</Button></Link>
+            </div>
+            : null;
         if (!this.isTokenMissing()) {
             page = <Home token={this.getToken()}></Home>;
         } else {
@@ -48,31 +51,36 @@ export default class Main extends Component {
                     </div>
                 </div>;
         }
-        var logout = sessionStorage.getItem("token") ?  <Button variant="outline-info" onClick={() => { sessionStorage.removeItem("token"); this.forceUpdate(); }}>Logout</Button> : null;
+        var logout = sessionStorage.getItem("token") ? <Link to="/"><Button variant="outline-info" onClick={() => { sessionStorage.removeItem("token"); this.forceUpdate(); }}>Logout</Button></Link> : null;
         return (
-            <div>
-                <Navbar expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">
-                        <img
-                            alt=""
-                            src={require('./logo.png')}
-                            height="50"
-                            className="d-inline-block align-top"
-                        />
-                    </Navbar.Brand>
-                    <Nav className="mr-auto">
-                        <div className="brand">Zverkan Bets</div>
-                    </Nav>
-                    <Nav className="mr-auto"></Nav>
-                    <Form inline>
-                        {logout}
-                    </Form>
-                </Navbar>
-                <br />
-                {page}
+            <Router history={history}>
+                <div>
+                    <Navbar expand="lg" bg="dark" variant="dark">
+                        <Navbar.Brand href="#home">
+                            <img
+                                alt=""
+                                src={require('./logo.png')}
+                                height="50"
+                                className="d-inline-block align-top"
+                            />
+                        </Navbar.Brand>
+                        <Nav className="mr-auto">
+                            <div className="brand">Zverkan Bets</div>
 
+                        </Nav>
+                        <Nav className="mr-auto"></Nav>
+                        <Form inline>
+                            {menu}
+                            {logout}
+                        </Form>
+                    </Navbar>
+                    <br />
 
-            </div>
+                </div>
+                <Route exact path="/" render={() => <div>{page}</div>}/>
+                <Route exact path="/mytickets" render={() => <MyTickets token={sessionStorage.getItem("token")}></MyTickets>}/>
+
+            </Router>
         );
     }
 

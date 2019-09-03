@@ -69,7 +69,6 @@ export class Home extends React.Component {
                 } else if (x.isSelected === true) {
                     x.isSelected = false;
                 }
-                // return null;
             });
             return {
                 newState,
@@ -102,7 +101,9 @@ export class Home extends React.Component {
                     oddsOverall: oddsOverall,
                     win: this.state.amount ? this.state.amount * oddsOverall : "",
                 },
-                () => { console.log(this.state.oddsOverall) }
+                () => { 
+                    //console.log(this.state.oddsOverall)
+                 }
             );
         });
     }
@@ -114,14 +115,14 @@ export class Home extends React.Component {
         this.setState({
             amount: amount,
         });
-        console.log(amount);
+        //console.log(amount);
     }
 
     setWin(win) {
         this.setState({
             win: win,
         });
-        console.log(win);
+        //console.log(win);
     }
 
     createTicket(alert) {
@@ -155,18 +156,18 @@ export class Home extends React.Component {
             }
         }
 
-        console.log(payload);
+        //console.log(payload);
 
         // send request
         axios.post(apiBaseUrl + '/saveTicket', payload, config)
             .then(function (response) {
                 console.log(response);
                 if (response.status === 200) {
-                    console.log("successfully made ticket");
+                    //console.log("successfully made ticket");
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                //console.log(error);
             });
 
         this.clearTicket();

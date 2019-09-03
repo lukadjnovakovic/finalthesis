@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-//import AppBar from 'material-ui/AppBar';
-//import RaisedButton from 'material-ui/RaisedButton';
-//import TextField from 'material-ui/TextField';
 import axios from "axios";
 import { Form, Button } from 'react-bootstrap';
 
@@ -22,20 +18,13 @@ export default class Login extends Component {
             "username": this.state.username,
             "password": this.state.password
         }
-        // e.preventDefault();
-        //console.log(payload);
         axios.post(apiBaseUrl + '/login', payload)
             .then(function (response) {
-                console.log(response);
                 if (response.status === 200) {
-                    console.log("login successfull");
-                    console.log(response.accessToken);
-                    console.log(this);
                     this.props.setToken(response.data.accessToken);
                 }
             }.bind(this))
             .catch(function (error) {
-                console.log(error);
                 alert(error)
             });
     }

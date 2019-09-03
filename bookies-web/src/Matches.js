@@ -31,7 +31,8 @@ export class Matches extends React.Component {
                     Cell: y => <Cell 
                                 onClick={this.props.handleCellClick} 
                                 tip={t.name}
-                                value={y.value}/>,
+                                value={y.value}
+                                />,
                     id: t.name,
                     resizable: false,
                     sortable: false,

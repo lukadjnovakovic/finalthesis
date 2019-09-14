@@ -10,4 +10,6 @@ public interface ITicketService {
     List<TicketDTO> retundAllTicketsById(Integer id) throws Exception;
 
     TicketEntity saveTicket(TicketEntity ticketEntity);
+
+    void deleteTicket(int id);
 }

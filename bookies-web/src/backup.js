@@ -6,7 +6,7 @@ import Leagues from './Leagues';
 import 'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
-import queryString from "query-string";
+import queryString from 'query-string';
 
 const api_base = 'http://localhost:8081';
 
@@ -70,6 +70,7 @@ export class Home extends React.Component {
                 } else if (x.isSelected === true) {
                     x.isSelected = false;
                 }
+                // return null;
             });
             return {
                 newState,
@@ -102,9 +103,7 @@ export class Home extends React.Component {
                     oddsOverall: oddsOverall,
                     win: this.state.amount ? this.state.amount * oddsOverall : "",
                 },
-                () => { 
-                    //console.log(this.state.oddsOverall)
-                 }
+                () => { console.log(this.state.oddsOverall) }
             );
         });
     }
@@ -116,15 +115,65 @@ export class Home extends React.Component {
         this.setState({
             amount: amount,
         });
-        //console.log(amount);
+        console.log(amount);
     }
 
     setWin(win) {
         this.setState({
             win: win,
         });
-        //console.log(win);
+        console.log(win);
     }
+
+    completePayment(paymentId, payerId) {
+
+        let apiBaseUrlPayPal = 'http://localhost:8081/';
+
+        let config = {
+            headers: {
+                "Authorization": "Bearer " + this.props.token,
+            }
+        }
+
+        axios.post(apiBaseUrlPayPal + 'api/complete/payment?paymentId=' + paymentId + '&PayerID=' + payerId ,config)
+            .then(function (response) {
+                console.log(response);
+                if (response.status === 'success') {
+                    console.log('payment success')
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    makePayment(sum) {
+
+        let apiBaseUrlPayPal = 'http://localhost:8081/';
+
+        let config = {
+            headers: {
+                "Authorization": "Bearer " + this.props.token,
+            }
+        }
+
+        axios.post(apiBaseUrlPayPal + 'api/make/payment?sum='+sum,config)
+            .then(function (response) {
+                console.log(response);
+                if (response.status === 200) {
+                    console.log('ggghghghgghghghghg');
+                    var win = window.open(response.data.redirect_url, '_self');
+                    win.focus();
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
+
+
 
     createTicket(alert) {
 
@@ -132,6 +181,8 @@ export class Home extends React.Component {
             alert.error(<div>Place your bet!</div>)
             return;
         }
+
+        this.makePayment(this.state.amount);
 
         // prepare request
         let apiBaseUrl = "http://localhost:8081/api"; //todo
@@ -149,35 +200,41 @@ export class Home extends React.Component {
             odds: odds,
             amount: this.state.amount,
             oddsOverall: this.state.oddsOverall,
-        };
+        }
 
         let config = {
             headers: {
                 "Authorization": "Bearer " + this.props.token,
             }
-        };
+        }
 
-        sessionStorage.setItem("payload", JSON.stringify(payload));
-        //console.log("CREATE TICKET " + payload);
-        axios.post(apiBaseUrl + '/make/payment?sum='+this.state.amount,config)
+        console.log(payload);
+
+        // send request
+        axios.post(apiBaseUrl + '/saveTicket', payload, config)
             .then(function (response) {
                 console.log(response);
-                if (response.status === 200) {
-                    console.log('Make payment done!');
-                    var win = window.open(response.data.redirect_url, '_self');
-                    // win.focus();
-
-                    this.clearTicket();
-
+                if (response.status === 201) {
+                    console.log("successfully made ticket");
                 }
-            }.bind(this))
+            })
             .catch(function (error) {
                 console.log(error);
             });
 
+        this.clearTicket();
     }
 
     componentDidMount() {
+        const values = queryString.parse(window.location.search);
+        console.log(values);
+        console.log(values.PayerID);
+        console.log(values.paymentId);
+
+        if(values.paymentId){
+            this.completePayment(values.PayerID,values.paymentId);
+        }
+
         fetch(api_base + '/api/games',
             {
                 method: 'GET',
@@ -203,64 +260,64 @@ export class Home extends React.Component {
                         this.setState({ tips: tips })
                     })
                     .then(() => {
-                        //console.log("FETCHED TIPS:");
-                        //console.log(this.state.tips);
+                            //console.log("FETCHED TIPS:");
+                            //console.log(this.state.tips);
 
-                        // init tips
-                        let tips = this.state.tips.map((t) => {
-                            return t.name;
-                        });
-
-                        // take tables object
-                        let matches = {}
-                        let leagues = new Set([])
-                        this.state.games.forEach(function (game, index) {
-                            let row = {};
-                            let currentGame = {};
-                            currentGame.data = row;
-                            currentGame.id = game.id;
-                            row.tips = [];
-                            tips.forEach(function (tip, index) {
-                                //console.log(item);
-                                row.tips.push({
-                                    tip: tip,
-                                    odds: game.odds.filter(x => x.tip.name === tip)[0].odds,
-                                    isSelected: false,
-                                    oddsID: game.odds.filter(x => x.tip.name === tip)[0].id
-                                });
+                            // init tips
+                            let tips = this.state.tips.map((t) => {
+                                return t.name;
                             });
 
-                            row.homeTeam = game.homeTeam.name;
-                            row.awayTeam = game.awayTeam.name;
-                            row.isOver = false;//game.homeGoals===null && game.awayGoals===null ? false : true;
-                            row.league = game.competition.name;
-                            row.homeGoals = game.homeGoals;
-                            row.awayGoals = game.awayGoals;
+                            // take tables object
+                            let matches = {}
+                            let leagues = new Set([])
+                            this.state.games.forEach(function (game, index) {
+                                let row = {};
+                                let currentGame = {};
+                                currentGame.data = row;
+                                currentGame.id = game.id;
+                                row.tips = [];
+                                tips.forEach(function (tip, index) {
+                                    //console.log(item);
+                                    row.tips.push({
+                                        tip: tip,
+                                        odds: game.odds.filter(x => x.tip.name === tip)[0].odds,
+                                        isSelected: false,
+                                        oddsID: game.odds.filter(x => x.tip.name === tip)[0].id
+                                    });
+                                });
 
-                            let league = {}
-                            league.name = game.competition.name;
-                            league.isSelected = false;
+                                row.homeTeam = game.homeTeam.name;
+                                row.awayTeam = game.awayTeam.name;
+                                row.isOver = false;//game.homeGoals===null && game.awayGoals===null ? false : true;
+                                row.league = game.competition.name;
+                                row.homeGoals = game.homeGoals;
+                                row.awayGoals = game.awayGoals;
 
-                            leagues.add(league);
+                                let league = {}
+                                league.name = game.competition.name;
+                                league.isSelected = false;
 
-                            if (!matches.hasOwnProperty(game.competition.name)) {
-                                matches[game.competition.name] = [];
-                            }
-                            matches[game.competition.name].push(currentGame);
-                        });
+                                leagues.add(league);
+
+                                if (!matches.hasOwnProperty(game.competition.name)) {
+                                    matches[game.competition.name] = [];
+                                }
+                                matches[game.competition.name].push(currentGame);
+                            });
 
 
-                        this.setState(
-                            {
-                                matches: matches,
-                                leagues: leagues,
-                            },
-                            () => {
-                                //console.log(this.state.matches);
-                                //console.log(this.state.leagues);
-                            },
-                        );
-                    }
+                            this.setState(
+                                {
+                                    matches: matches,
+                                    leagues: leagues,
+                                },
+                                () => {
+                                    //console.log(this.state.matches);
+                                    //console.log(this.state.leagues);
+                                },
+                            );
+                        }
                     )
             });
     }

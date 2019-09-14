@@ -81,4 +81,18 @@ public class TicketController {
         return ResponseEntity.created(location).body(new ApiResponse(true, "Ticket created successfully"));
     }
 
+    @DeleteMapping(value = "/deleteTicket/{id}",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteTicket(@PathVariable int id) {
+
+        ticketService.deleteTicket(id);
+
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/api/deleteTicket")
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).body(new ApiResponse(true, "Ticket deleted successfully"));
+
+    }
+
 }

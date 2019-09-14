@@ -50,4 +50,10 @@ public class TicketServiceImpl implements ITicketService {
 
     @Override
     public TicketEntity saveTicket(TicketEntity ticketEntity){return ticketRepo.save(ticketEntity);};
+
+    @Override
+    public void deleteTicket(int id){
+
+        ticketRepo.deleteById(id);
+    }
 }

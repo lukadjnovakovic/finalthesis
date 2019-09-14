@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Home from "./Home";
 import Loginscreen from "./Loginscreen";
+import Payment from "./Payment";
 import { Navbar, Form, Button, Nav } from 'react-bootstrap';
 import './Main.css';
 import MyTickets from "./MyTickets";
@@ -14,8 +15,11 @@ export default class Main extends Component {
         super(props);
         this.state = {
             token: null,
+
         }
     }
+
+
 
     setToken(token) {
         sessionStorage.setItem("token", token);
@@ -39,7 +43,7 @@ export default class Main extends Component {
             </div>
             : null;
         if (!this.isTokenMissing()) {
-            page = <Home token={this.getToken()}></Home>;
+            page = <Home token={this.getToken()} ></Home>;
         } else {
             page =
                 <div className="center-div">
@@ -79,7 +83,7 @@ export default class Main extends Component {
                 </div>
                 <Route exact path="/" render={() => <div>{page}</div>}/>
                 <Route exact path="/mytickets" render={() => <MyTickets token={sessionStorage.getItem("token")}></MyTickets>}/>
-
+                <Route exact path="/payment" render={()=><Payment/>}/>
             </Router>
         );
     }

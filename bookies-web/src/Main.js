@@ -18,9 +18,7 @@ export default class Main extends Component {
 
         }
     }
-
-
-
+    
     setToken(token) {
         sessionStorage.setItem("token", token);
         this.forceUpdate();

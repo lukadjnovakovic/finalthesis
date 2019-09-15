@@ -1,20 +1,21 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button } from 'react-bootstrap';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import queryString from "query-string";
 import axios from "axios";
+import './Main.css';
 const apiBaseUrl = 'http://localhost:8081/api';
 
 
 export class Payment extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         //console.log("PAYMENT CONST " + this.props.payload);
     }
 
-    handlePayment(){
+    handlePayment() {
 
         let config = {
             headers: {
@@ -26,9 +27,9 @@ export class Payment extends React.Component {
         console.log(values);
         console.log(values.PayerID);
         console.log(values.paymentId);
-        console.log('*************:'+sessionStorage.getItem("token"));
+        console.log('*************:' + sessionStorage.getItem("token"));
 
-        axios.post(apiBaseUrl + '/complete/payment?paymentId=' + values.paymentId + '&PayerID=' + values.PayerID,config)
+        axios.post(apiBaseUrl + '/complete/payment?paymentId=' + values.paymentId + '&PayerID=' + values.PayerID, config)
             .then(function (response) {
                 console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
                 console.log(response);
@@ -44,7 +45,7 @@ export class Payment extends React.Component {
             });
     }
 
-    makeTicket(){
+    makeTicket() {
         let config = {
             headers: {
                 "Authorization": "Bearer " + sessionStorage.getItem("token"),
@@ -67,16 +68,29 @@ export class Payment extends React.Component {
 
     render() {
         //let completePayment = <Button variant="outline-info" onClick={() => { this.handlePayment()}}>Confirm</Button>
-        let makeTicket = <Link to="/"><Button variant="outline-info" onClick={() => { this.handlePayment()}}>Confirm</Button></Link>
+        let makeTicket = <Link to="/"><Button variant="outline-info" onClick={() => { this.handlePayment() }}>Confirm</Button></Link>
+        let cancel = <Link to="/"><Button variant="outline-info">Cancel</Button></Link>
         return (
             <div>
-
-                {makeTicket}
+                <div className="center-div">
+                    <div className="row login-div">
+                        <div className="col-sm-4">
+                        </div>
+                        <div className="col-sm-4">
+                            <div class="row">
+                                <div className="col-sm">
+                                    {makeTicket}
+                                </div>
+                                <div className="col-sm">
+                                    {cancel}
+                                </div>
+                            </div>
+                        </div>
+                    </div>;
+                </div>
             </div>
         );
     }
-
-
 }
 
 export default Payment;

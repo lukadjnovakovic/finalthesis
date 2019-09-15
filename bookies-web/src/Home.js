@@ -2,11 +2,11 @@ import React from 'react';
 import './Home.css';
 import Matches from "./Matches";
 import Ticket from './Ticket';
+import Payment from './Payment';
 import Leagues from './Leagues';
 import 'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
-import queryString from "query-string";
 
 const api_base = 'http://localhost:8081';
 
@@ -39,11 +39,11 @@ export class Home extends React.Component {
         });
     }
 
-    clearTicket(){
-        Object.keys(this.state.matches).forEach(function(leagueName){
-            this.setState(state=>{
-                const newState = state.matches[leagueName].map(match=>{
-                    match.data.tips.map(x=>{
+    clearTicket() {
+        Object.keys(this.state.matches).forEach(function (leagueName) {
+            this.setState(state => {
+                const newState = state.matches[leagueName].map(match => {
+                    match.data.tips.map(x => {
                         x.isSelected = false;
                     })
                 })
@@ -54,9 +54,9 @@ export class Home extends React.Component {
         }.bind(this));
         this.setState({
             amount: "",
-            win:"",
+            win: "",
             oddsOverall: 1,
-            ticket:[],
+            ticket: [],
         })
     }
 
@@ -102,9 +102,9 @@ export class Home extends React.Component {
                     oddsOverall: oddsOverall,
                     win: this.state.amount ? this.state.amount * oddsOverall : "",
                 },
-                () => { 
+                () => {
                     //console.log(this.state.oddsOverall)
-                 }
+                }
             );
         });
     }
@@ -159,7 +159,7 @@ export class Home extends React.Component {
 
         sessionStorage.setItem("payload", JSON.stringify(payload));
         //console.log("CREATE TICKET " + payload);
-        axios.post(apiBaseUrl + '/make/payment?sum='+this.state.amount,config)
+        axios.post(apiBaseUrl + '/make/payment?sum=' + this.state.amount, config)
             .then(function (response) {
                 console.log(response);
                 if (response.status === 200) {
@@ -213,7 +213,8 @@ export class Home extends React.Component {
 
                         // take tables object
                         let matches = {}
-                        let leagues = new Set([])
+                        let leagues = new Set()
+                        let leagueNames = new Set()
                         this.state.games.forEach(function (game, index) {
                             let row = {};
                             let currentGame = {};
@@ -237,11 +238,14 @@ export class Home extends React.Component {
                             row.homeGoals = game.homeGoals;
                             row.awayGoals = game.awayGoals;
 
-                            let league = {}
-                            league.name = game.competition.name;
-                            league.isSelected = false;
+                            if (!leagueNames.has(game.competition.name)) {
+                                let league = {}
+                                league.name = game.competition.name;
+                                league.isSelected = false;
+                                leagues.add(league);
+                            }
 
-                            leagues.add(league);
+                            leagueNames.add(game.competition.name)
 
                             if (!matches.hasOwnProperty(game.competition.name)) {
                                 matches[game.competition.name] = [];
@@ -257,7 +261,7 @@ export class Home extends React.Component {
                             },
                             () => {
                                 //console.log(this.state.matches);
-                                //console.log(this.state.leagues);
+                                console.log(this.state.leagues);
                             },
                         );
                     }
@@ -269,12 +273,12 @@ export class Home extends React.Component {
         if (this.state.matches != null) {
 
             let matches = {}
-            this.state.leagues.forEach(function(league){
-                if (league.isSelected){
+            this.state.leagues.forEach(function (league) {
+                if (league.isSelected) {
                     matches[league.name] = this.state.matches[league.name];
                 }
             }.bind(this));
-            if (!Object.keys(matches).length){
+            if (!Object.keys(matches).length) {
                 matches = this.state.matches;
             }
 

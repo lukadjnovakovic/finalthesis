@@ -37,4 +37,17 @@ public class OddsServiceImpl implements IOddsService {
 
         return oddsMapper.odds2DTO(oddsEntity);
     }
+
+    @Override
+    public void saveAllOdds(List<OddsDTO> oddsDTOS){
+
+        List<OddsEntity> oddsEntities = new LinkedList<>();
+
+        for (OddsDTO oddsDTO : oddsDTOS) {
+            OddsEntity oddsEntity = oddsMapper.dto2entiry(oddsDTO);
+            oddsEntities.add(oddsEntity);
+        }
+
+        oddsRepo.saveAll(oddsEntities);
+    }
 }

@@ -57,4 +57,6 @@ public class OddsDTO {
         this.odds = odds;
         this.passed = passed;
     }
+
+
 }

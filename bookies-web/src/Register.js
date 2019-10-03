@@ -23,6 +23,11 @@ class Register extends Component {
         var apiBaseUrl = "http://localhost:8081/api/auth";
         //To be done:check for empty values before hitting submit
         var self = this;
+
+        if(!this.state.first_name || !this.state.last_name || !this.state.username || !this.state.password){
+            alert("Please fill all fields.");
+            return;
+        }
         var payload = {
             "name": this.state.first_name,
             "surname": this.state.last_name,
@@ -34,7 +39,7 @@ class Register extends Component {
             .then(function (response) {
                 console.log(response);
                 if (response.data.success === true) {
-                    console.log("registration successfull");
+                    console.log(response.data);
                     var loginscreen = [];
                     loginscreen.push(<Login parentContext={this} setToken={this.props.setToken} />);
                     var loginmessage = "Successful registration!";
@@ -47,7 +52,9 @@ class Register extends Component {
                 }
             }.bind(this))
             .catch(function (error) {
-                console.log(error);
+
+                    alert("Username taken.")
+
             });
     }
 

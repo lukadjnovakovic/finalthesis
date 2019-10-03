@@ -8,4 +8,5 @@ import org.mapstruct.Mapper;
 public interface OddsMapper {
 
     OddsDTO odds2DTO(OddsEntity oddsEntity);
+    OddsEntity dto2entiry(OddsDTO oddsDTO);
 }

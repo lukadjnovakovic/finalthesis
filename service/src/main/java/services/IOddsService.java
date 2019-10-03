@@ -9,4 +9,6 @@ public interface IOddsService {
     List<OddsDTO> returnAllOdds();
 
     OddsDTO returOddsDTObyId(int id);
+
+    void saveAllOdds(List<OddsDTO> oddsDTOS);
 }

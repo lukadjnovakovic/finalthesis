@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Form, Button } from 'react-bootstrap';
+import { useAlert } from 'react-alert';
 
 export default class Login extends Component {
     constructor(props) {
@@ -8,7 +9,8 @@ export default class Login extends Component {
         this.state = {
             token: '',
             username: '',
-            password: ''
+            password: '',
+
         }
     }
 
@@ -22,10 +24,14 @@ export default class Login extends Component {
             .then(function (response) {
                 if (response.status === 200) {
                     this.props.setToken(response.data.accessToken);
+                }else if (response.status === 400){
+                    //useAlert().error(<div>Wrong credentials!</div>)
+                    alert("Wrong dsadassdasdsadasd")
                 }
             }.bind(this))
             .catch(function (error) {
-                alert(error)
+                alert("Wrong credentials! Try again.")
+               // useAlert().error(<div>Wrong credentials!</div>)
             });
     }
 
